@@ -1,14 +1,13 @@
 const camera = require("./scripts/camera")
 const livePreview = require("./scripts/live-preview")
 
-const { getCurrentWindow } = require("electron");
-
 let livePrev;
 
 camera.initialize(function (res, msg, err) {
 
   if (!res) {
     console.error("camera:", msg, err);
+    document.getElementById("info").innerHTML=msg;
     return
   }
 
@@ -24,7 +23,7 @@ camera.initialize(function (res, msg, err) {
 /*
  * Trigger photo when clicking / touching anywhere at the screen
  */
-document.body.addEventListener("click", () => trigger())
+document.getElementById("capture").addEventListener("click", () => trigger())
 
 
 function trigger(callback) {
