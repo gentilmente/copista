@@ -7,7 +7,7 @@
     "start": "electron-forge start",
     "package": "electron-forge package",
     "make": "electron-forge make",
-    "postinstall": "./node_modules/.bin/electron-rebuild"
+    "postinstall": "./node_modules/.bin/electron-rebuild -f -w gphoto2"
   },
   "repository": "https://github.com/electron/electron-quick-start",
   "keywords": [
@@ -28,7 +28,8 @@
     "@fortawesome/fontawesome-free": "^6.0.0-beta2",
     "@tsed/gphoto2-driver": "^3.0.3",
     "bulma": "^0.9.3",
-    "electron": "^13.6.1"
+    "electron": "^16.0.1",
+    "electron-rebuild": "^3.2.5"
   },
   "dependencies": {
     "electron-squirrel-startup": "^1.0.0",
