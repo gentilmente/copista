@@ -1,7 +1,7 @@
-const FS = require("fs")
+const FS = require("fs");
 
 class LivePreview {
-  constructor(cam, root, framerate = 20) {
+  constructor(cam, root, framerate = 10) {
     this.cam = cam;
     this.root = root;
     this.run = false;
@@ -11,7 +11,7 @@ class LivePreview {
     this.count = 0;
   }
   setNewPic(data) {
-    // Use two divs to display image, this prevents flickering.
+    /*     // Use two divs to display image, this prevents flickering.
     let el = document.createElement("div");
     //el.src = "file://"+data;
     el.className = "live";
@@ -20,8 +20,19 @@ class LivePreview {
     this.count++;
     if (this.count > 2) {
       this.root.removeChild(this.root.lastChild);
+    } */
+
+    // Use two divs to display image, this prevents flickering.
+    let el = document.createElement("img");
+    el.className = "live";
+    el.src = "file://" + data;
+    this.root.prepend(el);
+    this.count++;
+    if (this.count > 2) {
+      this.root.removeChild(this.root.lastChild);
     }
   }
+
   takePreview() {
     return new Promise((res, rej) =>
       this.cam.takePicture(
@@ -36,12 +47,12 @@ class LivePreview {
   async refreshPreview() {
     try {
       let path = await this.takePreview();
-      if (this.lastImgPath) FS.unlink(this.lastImgPath, () => { });
+      if (this.lastImgPath) FS.unlink(this.lastImgPath, () => {});
       this.lastImgPath = path;
       this.setNewPic(path);
     } catch (e) {
       console.error(e);
-      this.stop()
+      this.stop();
     }
   }
   async previewInterval() {
@@ -49,8 +60,7 @@ class LivePreview {
       let timePrev = process.hrtime();
       await this.refreshPreview();
       let timeDiff = process.hrtime(timePrev);
-      let waitTime =
-        this.timePerImg - (timeDiff[0] * 1000 + timeDiff[1] / 1000000);
+      let waitTime = this.timePerImg - (timeDiff[0] + timeDiff[1]);
       setTimeout(() => {
         this.previewInterval();
       }, waitTime);

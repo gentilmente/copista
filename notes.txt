@@ -1,0 +1,11 @@
+gphoto module must change in
+binding.cc
+//https://github.com/electron/electron/issues/18397
+#if NODE_MAJOR_VERSION >= 10
+NAN_MODULE_WORKER_ENABLED(gphoto2, init)
+#else
+NODE_MODULE(gphoto2, init)
+#endif
+
+in binding.gyp
+11 for 14

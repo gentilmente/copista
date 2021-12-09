@@ -1,61 +1,66 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src  'unsafe-eval' 'self'"
+    />
+    <link rel="stylesheet" href="./styles/main.css" />
 
-<head>
-  <meta charset="UTF-8">
-  <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
-  <meta http-equiv="Content-Security-Policy" content="default-src  'unsafe-eval' 'self'">
-  <link rel="stylesheet" href="./styles/main.css" />
+    <title>Bibliohack!</title>
+  </head>
 
-  <title>Bibliohack!</title>
-</head>
-
-<body>
-  <section class="section">
-    <div class="container">
-      <h1 class="title">
-        Bibliohack </h1>
-      <p class="subtitle">
-        Soluciones para digitalización de <strong>patrimonio cultural</strong>!
-      </p>
-      <div class="columns is-vcentered">
-        <div class="column">
-          <div class="notification is-danger">
-            <button class="delete"></button>
-            <p id="info"></p>
+  <body>
+    <section class="section">
+      <div class="container">
+        <h1 class="title">Bibliohack</h1>
+        <p class="subtitle">
+          Soluciones para digitalización de
+          <strong>patrimonio cultural</strong>!
+        </p>
+        <div class="columns is-vcentered">
+          <div class="column">
+            <div class="notification is-danger">
+              <button class="delete"></button>
+              <p id="info"></p>
+            </div>
+            Node.js <span id="node-version"></span>, Chromium
+            <span id="chrome-version"></span>, Electron
+            <span id="electron-version"></span>.
+            <div class="buttons">
+              <a class="button is-info"> Find out more</a>
+              <a id="toggle-modal" class="button is-outlined"> Liveview</a>
+            </div>
           </div>
-          Node.js <span id="node-version"></span>,
-          Chromium <span id="chrome-version"></span>,
-          Electron <span id="electron-version"></span>.
-          <div class="buttons">
-            <a class="button is-info">
-              Find out more</a>
-            <a class="button is-danger is-outlined">
-              Buy now</a>
-          </div>
-        </div>
-        <div class="column">
-          <div id="live" class="box has-text-centered">
-            <button id="capture" class="button  is-info block">
-              <span class="icon">
-                <i class="fa-solid fa-camera"></i>
-              </span>
-              <span>capturar</span>
-            </button>
-            <figure class="image">
-              <img src="assets/mendoza.jpg">
-            </figure>
+          <div class="column is-three-quarters">
+            <div class="modal">
+              <div class="modal-background"></div>
+              <button id="capture" class="button">capturar</button>
+              <div class="modal-content">
+                <figure
+                  id="live"
+                  class="image is-inline-block is-horizontal-center"
+                ></figure>
+              </div>
+              <button class="modal-close is-large" aria-label="close"></button>
+            </div>
+
+            <div class="box has-text-centered">
+              <figure class="image">
+                <img src="assets/mendoza.jpg" />
+              </figure>
+            </div>
           </div>
         </div>
       </div>
-    </div>
-  </section>
+    </section>
 
-  <!-- You can also require other files to run in this process 
+    <!-- You can also require other files to run in this process 
     <script>require("./renderer.js")</script>
     <script defer type="module" src="./index.js"></script>
   -->
-  <script defer type="module" src="./renderer.js"></script>
-</body>
-
+    <script defer type="module" src="./renderer.js"></script>
+  </body>
 </html>

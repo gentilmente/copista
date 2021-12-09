@@ -1,5 +1,5 @@
 const gphoto2 = require("gphoto2");
-
+const fs = require("fs");
 class Camera {
   constructor() {}
 
@@ -94,14 +94,16 @@ class Camera {
   }
 
   _resizeAndSave(data, callback) {
-    const filename = "img_" + "foterli" + ".jpg";
-
-    function resizeInternal() {
-      const resizedFilePath = __dirname + filename;
-      const webFilepath = "photos/" + "img_" + "foterlic" + ".jpg";
-      const maxImageSize = 1500;
-    }
-    resizeInternal();
+    //to do: projects path on config.json
+    const filePath = "./content/carpetaProyecto/foterli" + ".jpg";
+    fs.writeFile(filePath, data, function (err) {
+      if (err) {
+        console.log(err);
+        callback(-3, "saving hq image failed", err);
+      } else {
+        callback(true);
+      }
+    });
   }
 }
 

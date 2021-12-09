@@ -1,5 +1,5 @@
 {
-  "name": "electron-quick-start",
+  "name": "Bibliohack",
   "version": "1.0.0",
   "description": "A minimal Electron application",
   "main": "main.js",
@@ -26,7 +26,6 @@
     "@electron-forge/maker-squirrel": "^6.0.0-beta.61",
     "@electron-forge/maker-zip": "^6.0.0-beta.61",
     "@fortawesome/fontawesome-free": "^6.0.0-beta2",
-    "@tsed/gphoto2-driver": "^3.0.3",
     "bulma": "^0.9.3",
     "electron": "^16.0.1",
     "electron-rebuild": "^3.2.5"

@@ -1,13 +1,5 @@
 @import url("../node_modules/@fortawesome/fontawesome-free/css/all.css");
 @import url("../node_modules/bulma/css/bulma.css");
-
 .live {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  right: 0;
-  left: 0;
-  background-repeat: no-repeat;
-  background-size: contain;
-  background-color: black;
+  position: relative;
 }
