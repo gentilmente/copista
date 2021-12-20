@@ -75,4 +75,4 @@ class BulmaNotification {
     this.containerNode.classList.remove("note-visible");
   }
 }
-module.exports = BulmaNotification;
+export default BulmaNotification;
