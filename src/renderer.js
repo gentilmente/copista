@@ -1,6 +1,23 @@
 const camera = require("./scripts/camera");
 const livePreview = require("./scripts/live-preview");
 
+/* import BulmaNotification from "./scripts/bulma-notifications.js";
+
+let notif;
+let notif1;
+
+window.onload = () => {
+  notif = new BulmaNotification();
+  document
+    .querySelector("#toggle-modal")
+    .addEventListener("click", showNotification);
+};
+
+// Display a notification
+function showNotification() {
+  notif.show("Notification Title", "Notification message", "primary", 2000);
+} */
+
 const toggleModal = () => {
   const btnLiveview = document.getElementById("toggle-modal");
   const modal = document.querySelector(".modal");
@@ -30,7 +47,8 @@ let livePrev;
 camera.initialize(function (res, msg, err) {
   if (!res) {
     console.error("camera:", msg, err);
-    document.getElementById("info").innerHTML = msg;
+    //document.getElementById("info").innerHTML = msg;
+
     return;
   }
   toggleModal();

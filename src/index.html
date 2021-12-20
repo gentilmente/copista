@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
+    <meta
+      http-equiv="Content-Security-Policy"
+      content="default-src  'unsafe-eval' 'self'"
+    />
+    <link rel="stylesheet" href="./styles/main.css" />
+
+    <title>Bibliohack!</title>
+  </head>
+
+  <body class="has-background-dark">
+    <section class="section has-text-light">
+      <div class="container">
+        <nav
+          class="breadcrumb is-centered has-arrow-separator"
+          aria-label="breadcrumbs"
+        >
+          <ul>
+            <li class="is-active">
+              <a class="has-text-light" href="#" aria-current="page">Captura</a>
+            </li>
+            <li><a class="has-text-light" href="#">Postproceso 1</a></li>
+            <li><a class="has-text-light" href="#">Postproceso 2</a></li>
+            <li><a class="has-text-light" href="#">Exportar</a></li>
+          </ul>
+        </nav>
+        <!--         <div class="notification is-danger">
+          <button class="delete"></button>
+          <p id="info"></p>
+        </div> -->
+        <div class="columns is-vcentered">
+          <div class="column">
+            <aside class="menu">
+              <p class="menu-label has-text-light">General</p>
+              <ul class="menu-list">
+                <li><a class="is-active" id="toggle-modal">Liveview</a></li>
+                <li><a>Customers</a></li>
+              </ul>
+              <p class="menu-label has-text-light">Cámara info</p>
+              <ul class="menu-list">
+                <li><a>Team Settings</a></li>
+                <li>
+                  <a>Versiones</a>
+                  <ul>
+                    <li>
+                      <a>Node.js <span id="node-version"></span></a>
+                    </li>
+                    <li>
+                      <a>Chromium <span id="chrome-version"></span></a>
+                    </li>
+                    <li>
+                      <a>Electron <span id="electron-version"></span></a>
+                    </li>
+                  </ul>
+                </li>
+                <li><a>Invitations</a></li>
+                <li><a>Cloud Storage Environment Settings</a></li>
+                <li><a>Authentication</a></li>
+              </ul>
+            </aside>
+          </div>
+          <div class="column is-three-quarters">
+            <div class="modal">
+              <div class="modal-background"></div>
+              <button id="capture" class="button">capturar</button>
+              <div class="modal-content">
+                <figure
+                  id="live"
+                  class="image is-inline-block is-horizontal-center"
+                ></figure>
+              </div>
+              <button class="modal-close is-large" aria-label="close"></button>
+            </div>
+
+            <div class="box has-text-centered">
+              <figure class="image">
+                <img src="../assets/mendoza.jpg" />
+              </figure>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- You can also require other files to run in this process 
+    <script>require("./renderer.js")</script>
+    <script defer type="module" src="./index.js"></script>
+  -->
+    <script defer type="module" src="./renderer.js"></script>
+  </body>
+</html>

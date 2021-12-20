@@ -17,7 +17,7 @@ class Camera {
     // Negative value or undefined will disable logging, levels 0-4 enable it.
     this.GPhoto.setLogLevel(-1);
 
-    var self = this;
+    const self = this;
     this.GPhoto.list(function (list) {
       if (list.length === 0) {
         callback(false, "No camera found", null);
