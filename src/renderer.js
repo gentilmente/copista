@@ -1,47 +1,24 @@
-const camera = require("./scripts/camera");
-const livePreview = require("./scripts/live-preview");
+import toggleModal from './scripts/utils.js';
+import BulmaNotification from './scripts/bulma-notifications.js';
 
-import BulmaNotification from "./scripts/bulma-notifications.js";
-
-const toggleModal = () => {
-  const btnLiveview = document.getElementById("toggle-modal");
-  const modal = document.querySelector(".modal");
-  const close = document.querySelector(".modal-close");
-
-  btnLiveview.onclick = () => modal.classList.toggle("is-active");
-  close.onclick = () => {
-    modal.classList.toggle("is-active");
-    livePrev.stop();
-  };
-};
-
-document.addEventListener("DOMContentLoaded", () => {
-  (document.querySelectorAll(".notification .delete") || []).forEach(
-    ($delete) => {
-      const $notification = $delete.parentNode;
-
-      $delete.addEventListener("click", () => {
-        $notification.parentNode.removeChild($notification);
-      });
-    }
-  );
-});
+const camera = require('./scripts/camera');
+const livePreview = require('./scripts/live-preview');
 
 let livePrev;
 
 camera.initialize(function (res, msg, err) {
   let notif = new BulmaNotification();
-  notif.show("Notification Title", "Notification message", "primary", 2000);
+  //notif.show('Notification Title', 'Notification message', 'primary', 2000);
   if (!res) {
-    console.error("camera:", msg, err);
-    notif.show("OH no!", msg, "danger");
+    console.error('camera:', msg, err);
+    notif.show('OH no!', msg, 'danger');
     return;
   }
   toggleModal();
 
   livePrev = new livePreview(
     camera.camera,
-    document.getElementById("live"),
+    document.getElementById('live'),
     10
   );
   livePrev.start();
@@ -50,7 +27,7 @@ camera.initialize(function (res, msg, err) {
 /*
  * Trigger photo when clicking capture button
  */
-document.getElementById("capture").addEventListener("click", () => trigger());
+document.getElementById('capture').addEventListener('click', () => trigger());
 
 let executing = false;
 
