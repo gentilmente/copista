@@ -1,15 +1,5 @@
-export default function toggleModal() {
-  console.log('hi');
-  const btnLiveview = document.getElementById('toggle-modal');
-  const modal = document.querySelector('.modal');
-  const close = document.querySelector('.modal-close');
-
-  btnLiveview.onclick = () => modal.classList.toggle('is-active');
-  close.onclick = () => {
-    modal.classList.toggle('is-active');
-    //livePrev.stop();
-  };
-}
+/* 
+bulma-notifications ya tiene su JS pero lo dejo como ejemplo
 
 document.addEventListener('DOMContentLoaded', () => {
   (document.querySelectorAll('.notification .delete') || []).forEach(
@@ -22,3 +12,4 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   );
 });
+ */

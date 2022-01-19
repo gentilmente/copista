@@ -9,8 +9,8 @@
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="./styles/main.css" />
-
     <title>Bibliohack!</title>
+    <script defer type="module" src="./renderer.js"></script>
   </head>
 
   <body class="has-background-dark has-text-light">
@@ -37,9 +37,9 @@
       </div>
     </div>
 
-    <div class="container">
-      <div class="columns is-vcentered">
-        <div class="column">
+    <div class="columns">
+      <div class="column">
+        <div class="panel">
           <aside class="menu">
             <p class="menu-label has-text-light">Cámara info</p>
             <ul class="menu-list">
@@ -64,35 +64,14 @@
             </ul>
           </aside>
         </div>
-        <div class="column is-three-quarters">
-          <!--           <div class="modal">
-            <div class="modal-background"></div>
-            <button id="capture" class="button">capturar</button>
-            <div class="modal-content">
-              <figure
-                id="live"
-                class="image is-inline-block is-horizontal-center"
-              ></figure>
-            </div>
-            <button
-              class="modal-close delete is-large"
-              aria-label="close"
-            ></button>
-          </div> -->
-
-          <div class="box has-text-centered">
-            <figure id="live" class="image">
-              <img src="../assets/mendoza.jpg" />
-            </figure>
-          </div>
+      </div>
+      <div class="column is-10">
+        <div class="box has-text-centered">
+          <figure id="live" class="image">
+            <img src="../assets/mendoza.jpg" />
+          </figure>
         </div>
       </div>
     </div>
-
-    <!-- You can also require other files to run in this process 
-    <script>require("./renderer.js")</script>
-    <script defer type="module" src="./index.js"></script>
-  -->
-    <script defer type="module" src="./renderer.js"></script>
   </body>
 </html>
