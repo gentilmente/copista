@@ -1,8 +1,6 @@
-const gphoto2 = require("gphoto2");
-const fs = require("fs");
+const gphoto2 = require('gphoto2');
+const fs = require('fs');
 class Camera {
-  constructor() {}
-
   /*
    * Detect and configure camera
    */
@@ -20,16 +18,18 @@ class Camera {
     const self = this;
     this.GPhoto.list(function (list) {
       if (list.length === 0) {
-        callback(false, "No camera found", null);
+        callback(false, 'No camera found', null);
         return;
       }
       self.camera = list[0];
 
-      console.log("gphoto2: Found", self.camera.model);
+      console.log('gphoto2: Found', self.camera.model);
+      //console.log(self.camera);
 
-      self.camera.setConfigValue("capturetarget", 1, function (err) {
+      self.camera.setConfigValue('capturetarget', 1, function (err) {
         if (err) {
-          callback(false, "setting config failed", err);
+          callback(false, 'setting config failed', err);
+          self.camera = undefined;
         } else {
           callback(true);
         }
@@ -49,11 +49,13 @@ class Camera {
 
     this.camera.getConfig(function (err, settings) {
       if (err) {
-        if (callback) callback(false, "connection test failed", err);
+        if (callback) callback(false, 'connection test failed', err);
       } else {
         self.camera == undefined; // needs to be reinitialized
         if (callback) callback(true);
       }
+      console.log(settings);
+      return settings;
     });
   }
 
@@ -69,7 +71,7 @@ class Camera {
     var self = this;
 
     if (self.camera === undefined) {
-      callback(-1, "camera not initialized", null);
+      callback(-1, 'camera not initialized', null);
       return;
     }
 
@@ -80,7 +82,7 @@ class Camera {
       function (err, data) {
         if (err) {
           self.camera = undefined; // needs to be reinitialized
-          callback(-2, "connection to camera failed", err);
+          callback(-2, 'connection to camera failed', err);
           return;
         }
 
@@ -90,20 +92,43 @@ class Camera {
   }
 
   _createSamplePicture(callback) {
-    console.log("sample picture");
+    console.log('sample picture');
   }
 
   _resizeAndSave(data, callback) {
     //to do: projects path on config.json
-    const filePath = "./content/carpetaProyecto/foterli" + ".jpg";
+    const filePath = './content/carpetaProyecto/foterli' + '.jpg';
     fs.writeFile(filePath, data, function (err) {
       if (err) {
         console.log(err);
-        callback(-3, "saving hq image failed", err);
+        callback(-3, 'saving hq image failed', err);
       } else {
         callback(true);
       }
     });
+  }
+
+  getBattery() {
+    var self = this;
+    console.log(this);
+    if (self.camera === undefined) {
+      callback(-1, 'camera not initialized', null);
+      return;
+    }
+
+    let level = {};
+    self.camera.getConfig(function (err, settings) {
+      level = {
+        label: settings.main.children.status.children.batterylevel.label,
+        value: settings.main.children.status.children.batterylevel.value,
+      };
+
+      console.log(level);
+      /*       document.getElementById('bat').innerHTML =
+        level.label + ': ' + level.value; */
+    });
+    return level;
+    //return 'hola';
   }
 }
 
@@ -111,5 +136,5 @@ class Camera {
  * Module exports for connection
  */
 let camera = new Camera();
-//export { camera as default };
-module.exports = camera;
+export { camera as default };
+//module.exports = camera;

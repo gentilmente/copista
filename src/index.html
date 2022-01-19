@@ -7,84 +7,100 @@
       http-equiv="Content-Security-Policy"
       content="default-src  'unsafe-eval' 'self'"
     />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="./styles/main.css" />
 
     <title>Bibliohack!</title>
   </head>
 
-  <body class="has-background-dark">
-    <section class="section has-text-light">
-      <div class="container">
-        <nav
-          class="breadcrumb is-centered has-arrow-separator"
-          aria-label="breadcrumbs"
-        >
-          <ul>
-            <li class="is-active">
-              <a class="has-text-light" href="#" aria-current="page">Captura</a>
-            </li>
-            <li><a class="has-text-light" href="#">Postproceso 1</a></li>
-            <li><a class="has-text-light" href="#">Postproceso 2</a></li>
-            <li><a class="has-text-light" href="#">Exportar</a></li>
-          </ul>
-        </nav>
-
-        <div class="columns is-vcentered">
-          <div class="column">
-            <aside class="menu">
-              <p class="menu-label has-text-light">General</p>
-              <ul class="menu-list">
-                <li><a class="is-active" id="toggle-modal">Liveview</a></li>
-                <li><a>Customers</a></li>
-              </ul>
-              <p class="menu-label has-text-light">Cámara info</p>
-              <ul class="menu-list">
-                <li id="marca"><a>Marca</a></li>
-                <li><a>Modelo</a></li>
-                <li><a> algo</a></li>
-                <li><a>Authentication</a></li>
-                <li>
-                  <a>Versiones</a>
-                  <ul>
-                    <li>
-                      <a>Node.js <span id="node-version"></span></a>
-                    </li>
-                    <li>
-                      <a>Chromium <span id="chrome-version"></span></a>
-                    </li>
-                    <li>
-                      <a>Electron <span id="electron-version"></span></a>
-                    </li>
-                  </ul>
-                </li>
-              </ul>
-            </aside>
-          </div>
-          <div class="column is-three-quarters">
-            <div class="modal">
-              <div class="modal-background"></div>
-              <button id="capture" class="button">capturar</button>
-              <div class="modal-content">
-                <figure
-                  id="live"
-                  class="image is-inline-block is-horizontal-center"
-                ></figure>
-              </div>
-              <button
-                class="modal-close delete is-large"
-                aria-label="close"
-              ></button>
-            </div>
-
-            <div class="box has-text-centered">
-              <figure class="image">
-                <img src="../assets/mendoza.jpg" />
-              </figure>
-            </div>
+  <body class="has-background-dark has-text-light">
+    <nav class="navbar has-background-dark has-text-light">
+      <div class="navbar-menu"></div>
+      <div class="navbar-end">
+        <div class="navbar-item has-dropdown is-hoverable">
+          <a class="navbar-link"> Account </a>
+          <div class="navbar-dropdown">
+            <a class="navbar-item"> Dashboard </a>
+            <a class="navbar-item">Profile</a>
+            <a class="navbar-item">Settings</a>
+            <hr class="navbar-divider" />
+            <a class="navbar-item">Logout</a>
           </div>
         </div>
       </div>
-    </section>
+    </nav>
+
+    <div
+      class="breadcrumb is-centered has-arrow-separator"
+      aria-label="breadcrumbs"
+    >
+      <div class="container">
+        <ul>
+          <li class="is-active">
+            <a class="has-text-light" href="#" aria-current="page">Captura</a>
+          </li>
+          <li><a class="has-text-light" href="#">Postproceso 1</a></li>
+          <li><a class="has-text-light" href="#">Postproceso 2</a></li>
+          <li><a class="has-text-light" href="#">Exportar</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="container">
+      <div class="columns is-vcentered">
+        <div class="column">
+          <aside class="menu">
+            <p class="menu-label has-text-light">General</p>
+            <ul class="menu-list">
+              <li><a class="is-active" id="toggle-modal">Liveview</a></li>
+              <li><a>Customers</a></li>
+            </ul>
+            <p class="menu-label has-text-light">Cámara info</p>
+            <ul class="menu-list">
+              <li id="marca"><a>Marca</a></li>
+              <li>Modelo</li>
+              <li id="bat">Batería:</li>
+              <li><a>Authentication</a></li>
+              <li>
+                <a>Versiones</a>
+                <ul>
+                  <li>
+                    <a>Node.js <span id="node-version"></span></a>
+                  </li>
+                  <li>
+                    <a>Chromium <span id="chrome-version"></span></a>
+                  </li>
+                  <li>
+                    <a>Electron <span id="electron-version"></span></a>
+                  </li>
+                </ul>
+              </li>
+            </ul>
+          </aside>
+        </div>
+        <div class="column is-three-quarters">
+          <div class="modal">
+            <div class="modal-background"></div>
+            <button id="capture" class="button">capturar</button>
+            <div class="modal-content">
+              <figure
+                id="live"
+                class="image is-inline-block is-horizontal-center"
+              ></figure>
+            </div>
+            <button
+              class="modal-close delete is-large"
+              aria-label="close"
+            ></button>
+          </div>
+
+          <div class="box has-text-centered">
+            <figure class="image">
+              <img src="../assets/mendoza.jpg" />
+            </figure>
+          </div>
+        </div>
+      </div>
+    </div>
 
     <!-- You can also require other files to run in this process 
     <script>require("./renderer.js")</script>

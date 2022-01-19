@@ -1,7 +1,8 @@
 import toggleModal from './scripts/utils.js';
 import BulmaNotification from './scripts/bulma-notifications.js';
+import camera from './scripts/camera.js';
 
-const camera = require('./scripts/camera');
+//const camera = require('./scripts/camera');
 const livePreview = require('./scripts/live-preview');
 
 let livePrev;
@@ -14,14 +15,21 @@ camera.initialize(function (res, msg, err) {
     notif.show('OH no!', msg, 'danger');
     return;
   }
-  toggleModal();
 
-  livePrev = new livePreview(
+  //toggleModal();
+
+  /*   livePrev = new livePreview(
     camera.camera,
     document.getElementById('live'),
     10
   );
-  livePrev.start();
+  livePrev.start(); */
+  let level = camera.getBattery();
+  setTimeout(() => {
+    console.log(camera);
+    console.log(level);
+  }, 2000);
+  document.getElementById('bat').innerHTML = level.label + ': ' + level.value;
 });
 
 /*
@@ -70,4 +78,5 @@ function trigger(callback) {
 /*
  * Module exports
  */
+
 module.exports.triggerPhoto = trigger;
