@@ -14,30 +14,21 @@
   </head>
 
   <body class="has-background-dark has-text-light">
-    <nav class="navbar has-background-dark has-text-light">
-      <div class="navbar-menu"></div>
-      <div class="navbar-end">
-        <div class="navbar-item has-dropdown is-hoverable">
-          <a class="navbar-link"> Account </a>
-          <div class="navbar-dropdown">
-            <a class="navbar-item"> Dashboard </a>
-            <a class="navbar-item">Profile</a>
-            <a class="navbar-item">Settings</a>
-            <hr class="navbar-divider" />
-            <a class="navbar-item">Logout</a>
-          </div>
-        </div>
-      </div>
-    </nav>
-
     <div
-      class="breadcrumb is-centered has-arrow-separator"
+      class="breadcrumb is-right has-arrow-separator has-text-light has-background-dark box"
       aria-label="breadcrumbs"
     >
-      <div class="container">
+      <div class="is-inline-block">Carpeta/folio #CD3435-DSFG-2018</div>
+      <div class="is-inline-block is-pulled-right">
         <ul>
           <li class="is-active">
-            <a class="has-text-light" href="#" aria-current="page">Captura</a>
+            <a
+              class="has-text-light"
+              id="toggle-modal"
+              href="#"
+              aria-current="page"
+              >Captura</a
+            >
           </li>
           <li><a class="has-text-light" href="#">Postproceso 1</a></li>
           <li><a class="has-text-light" href="#">Postproceso 2</a></li>
@@ -45,15 +36,11 @@
         </ul>
       </div>
     </div>
+
     <div class="container">
       <div class="columns is-vcentered">
         <div class="column">
           <aside class="menu">
-            <p class="menu-label has-text-light">General</p>
-            <ul class="menu-list">
-              <li><a class="is-active" id="toggle-modal">Liveview</a></li>
-              <li><a>Customers</a></li>
-            </ul>
             <p class="menu-label has-text-light">Cámara info</p>
             <ul class="menu-list">
               <li id="marca"><a>Marca</a></li>
@@ -78,7 +65,7 @@
           </aside>
         </div>
         <div class="column is-three-quarters">
-          <div class="modal">
+          <!--           <div class="modal">
             <div class="modal-background"></div>
             <button id="capture" class="button">capturar</button>
             <div class="modal-content">
@@ -91,10 +78,10 @@
               class="modal-close delete is-large"
               aria-label="close"
             ></button>
-          </div>
+          </div> -->
 
           <div class="box has-text-centered">
-            <figure class="image">
+            <figure id="live" class="image">
               <img src="../assets/mendoza.jpg" />
             </figure>
           </div>
