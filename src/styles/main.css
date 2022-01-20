@@ -1,6 +1,7 @@
 @import '../../node_modules/@fortawesome/fontawesome-free/css/all.css';
 @import '../../node_modules/bulma/css/bulma.css';
 @import '../../node_modules/bulma-o-steps/bulma-steps.min.css';
+@import '../../node_modules/bulma-carousel/dist/css/bulma-carousel.min.css';
 @import './style.css';
 .live {
   position: relative;
