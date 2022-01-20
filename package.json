@@ -31,6 +31,7 @@
     "electron-rebuild": "^3.2.5"
   },
   "dependencies": {
+    "bulma-o-steps": "^1.1.0",
     "electron-squirrel-startup": "^1.0.0",
     "gphoto2": "^0.3.2"
   },

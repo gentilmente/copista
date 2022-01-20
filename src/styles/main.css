@@ -1,6 +1,7 @@
-@import url("../../node_modules/@fortawesome/fontawesome-free/css/all.css");
-@import url("../../node_modules/bulma/css/bulma.css");
-@import url("./style.css");
+@import '../../node_modules/@fortawesome/fontawesome-free/css/all.css';
+@import '../../node_modules/bulma/css/bulma.css';
+@import '../../node_modules/bulma-o-steps/bulma-steps.min.css';
+@import './style.css';
 .live {
   position: relative;
 }
