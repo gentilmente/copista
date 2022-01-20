@@ -9,7 +9,7 @@ let livePrev;
 
 bulmaCarousel.attach('#carousel-demo', {
   slidesToScroll: 1,
-  slidesToShow: 4,
+  slidesToShow: 5,
 });
 
 camera.initialize(function (res, msg, err) {
