@@ -2,16 +2,16 @@ import BulmaNotification from './scripts/bulma-notifications.js';
 import camera from './scripts/camera.js';
 
 const bulmaCarousel = require('bulma-carousel');
-
+const bulmaQuickview = require('bulma-quickview');
 const livePreview = require('./scripts/live-preview');
 
-let livePrev;
-
+bulmaQuickview.attach();
 bulmaCarousel.attach('#carousel-demo', {
   slidesToScroll: 1,
   slidesToShow: 5,
 });
 
+let livePrev;
 camera.initialize(function (res, msg, err) {
   let notif = new BulmaNotification();
   //notif.show('Notification Title', 'Notification message', 'primary', 2000);

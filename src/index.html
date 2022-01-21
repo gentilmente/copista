@@ -57,28 +57,67 @@
 
     <div class="columns">
       <div class="column">
+        <div
+          id="quickviewDefault"
+          class="quickview has-background-dark is-left"
+        >
+          <header class="quickview-header">
+            <p class="title has-text-light">Cámara</p>
+            <span class="delete" data-dismiss="quickview"></span>
+          </header>
+
+          <div class="quickview-body">
+            <div class="quickview-block">
+              ... cosas mas sadfsd
+              <figure class="image">
+                <img src="../assets/histogram.webp" />
+              </figure>
+            </div>
+            <figure class="image">
+              <img src="../assets/histogram.webp" />
+            </figure>
+          </div>
+
+          <footer class="quickview-footer has-background-dark">
+            foooteeerrrr
+          </footer>
+        </div>
+
+        <button
+          class="button is-primary"
+          data-show="quickview"
+          data-target="quickviewDefault"
+        >
+          Show quickview
+        </button>
+
         <aside class="menu">
           <p class="menu-label has-text-light">Cámara info</p>
           <ul class="menu-list">
-            <li id="marca"><a>Marca</a></li>
-            <li>Modelo</li>
-            <li id="bat">Batería:</li>
-            <li><a>Authentication</a></li>
+            <li id="marca">Nikon</li>
+            <li id="model">D5100</li>
+            <li id="bat">Batería: 15%</li>
+            <li>Autofoco : on</li>
+            <p class="menu-label has-text-light">Foto</p>
             <li>
-              <a>Versiones</a>
+              <a>Diafragma: 16</a>
               <ul>
                 <li>
-                  <a>Node.js <span id="node-version"></span></a>
+                  <a>Diafragma: 16 <span id="node-version"></span></a>
                 </li>
                 <li>
-                  <a>Chromium <span id="chrome-version"></span></a>
+                  <a>Diafragma: 16 <span id="chrome-version"></span></a>
                 </li>
                 <li>
-                  <a>Electron <span id="electron-version"></span></a>
+                  <a>Diafragma: 16 <span id="electron-version"></span></a>
                 </li>
               </ul>
             </li>
-            <li id="marca"><a>Marca</a></li>
+            <li>
+              <figure class="image">
+                <img src="../assets/histogram.webp" />
+              </figure>
+            </li>
             <li id="bat">Batería:</li>
             <li><a>Authentication</a></li>
             <li>
@@ -105,33 +144,38 @@
       <!-- Start Carousel -->
       <div id="carousel-demo" class="carousel">
         <div class="item-1">
-          <figure class="image is-3by2">
+          <figure class="image is-128x128">
             <img src="../assets/carousel/1.jpg" />
           </figure>
         </div>
         <div class="item-2">
-          <figure class="image is-3by2">
+          <figure class="image is-128x128">
             <img src="../assets/carousel/2.jpg" />
           </figure>
         </div>
         <div class="item-3">
-          <figure class="image is-3by2">
+          <figure class="image is-128x128">
             <img src="../assets/carousel/3.jpg" />
           </figure>
         </div>
         <div class="item-4">
-          <figure class="image is-3by2">
+          <figure class="image is-128x128">
             <img src="../assets/carousel/4.jpg" />
           </figure>
         </div>
         <div class="item-5">
-          <figure class="image is-3by2">
+          <figure class="image is-128x128">
             <img src="../assets/carousel/5.jpg" />
           </figure>
         </div>
         <div class="item-6">
-          <figure class="image is-3by2">
+          <figure class="image is-128x128">
             <img src="../assets/carousel/6.jpg" />
+          </figure>
+        </div>
+        <div class="item-7">
+          <figure class="image is-128x128">
+            <img src="../content/carpetaProyecto/DSC_0308-200-80.jpg" />
           </figure>
         </div>
       </div>

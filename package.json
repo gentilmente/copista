@@ -33,6 +33,7 @@
   "dependencies": {
     "bulma-carousel": "^4.0.24",
     "bulma-o-steps": "^1.1.0",
+    "bulma-quickview": "^2.0.0",
     "electron-squirrel-startup": "^1.0.0",
     "gphoto2": "^0.3.2"
   },
