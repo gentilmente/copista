@@ -5,7 +5,7 @@
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src  'unsafe-eval' 'self'"
+      content="default-src 'self'; script-src 'self'"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="./styles/main.css" />
@@ -117,16 +117,6 @@
               <figure class="image">
                 <img src="../assets/histogram.webp" />
               </figure>
-            </li>
-            <li id="bat">Batería:</li>
-            <li><a>Authentication</a></li>
-            <li>
-              <a>Versiones</a>
-              <ul>
-                <li>
-                  <a>Chromium <span id="chrome-version"></span></a>
-                </li>
-              </ul>
             </li>
           </ul>
         </aside>
