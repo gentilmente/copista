@@ -136,5 +136,5 @@ class Camera {
  * Module exports for connection
  */
 let camera = new Camera();
-export { camera as default };
-//module.exports = camera;
+//export { camera as default };
+module.exports = camera;

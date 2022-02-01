@@ -30,7 +30,6 @@ class BulmaNotification {
     this.containerNode.appendChild(this.closeButtonNode);
     this.containerNode.appendChild(this.titleNode);
     this.containerNode.appendChild(this.messageNode);
-    console.log(document.body);
     // Inserting the notification to the page body
     document.body.appendChild(this.containerNode);
   }
