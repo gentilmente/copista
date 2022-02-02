@@ -124,16 +124,16 @@ class Camera {
         value: settings.main.children.status.children.batterylevel.value,
       };
     });
-    /*     return new Promise((resolve) => {
+    return new Promise((resolve) => {
       //resolve(level);
       setTimeout(() => {
         console.log(level);
         resolve(level);
       }, 20);
-    }); */
-    setTimeout(() => {
+    });
+    /* setTimeout(() => {
       return level;
-    }, 2000);
+    }, 2000); */
   }
 }
 
