@@ -9,6 +9,7 @@ contextBridge.exposeInMainWorld('biblioApi', {
     new BulmaNotification().show(title, msg, type);
   },
   onInitCamera: (cb) => ipcRenderer.on('notif:error', cb),
+  onInitCam: (cb) => ipcRenderer.on('settings', cb),
   //Bulma: ipcRenderer.invoke(new BulmaNotification()),
 });
 

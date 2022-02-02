@@ -1,5 +1,6 @@
 const gphoto2 = require('gphoto2');
 const fs = require('fs');
+let self;
 class Camera {
   /*
    * Detect and configure camera
@@ -15,7 +16,7 @@ class Camera {
     // Negative value or undefined will disable logging, levels 0-4 enable it.
     this.GPhoto.setLogLevel(-1);
 
-    const self = this;
+    self = this;
     this.GPhoto.list(function (list) {
       if (list.length === 0) {
         callback(false, 'No camera found', null);
@@ -109,8 +110,8 @@ class Camera {
   }
 
   getBattery() {
-    var self = this;
-    console.log(this);
+    //let self = this;
+    //console.log(this);
     if (self.camera === undefined) {
       callback(-1, 'camera not initialized', null);
       return;
@@ -122,13 +123,17 @@ class Camera {
         label: settings.main.children.status.children.batterylevel.label,
         value: settings.main.children.status.children.batterylevel.value,
       };
-
-      console.log(level);
-      /*       document.getElementById('bat').innerHTML =
-        level.label + ': ' + level.value; */
     });
-    return level;
-    //return 'hola';
+    /*     return new Promise((resolve) => {
+      //resolve(level);
+      setTimeout(() => {
+        console.log(level);
+        resolve(level);
+      }, 20);
+    }); */
+    setTimeout(() => {
+      return level;
+    }, 2000);
   }
 }
 
