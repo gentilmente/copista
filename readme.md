@@ -1,4 +1,4 @@
-# capture photos with Gphoto2 in side an Electron app
+# capture photos with Gphoto2 inside an Electron app
 
 ## To Use
 
