@@ -1,5 +1,6 @@
 const gphoto2 = require('gphoto2');
 const fs = require('fs');
+const { settings } = require('cluster');
 let self;
 class Camera {
   /*
@@ -39,25 +40,7 @@ class Camera {
   }
 
   isInitialized() {
-    return this.camera !== undefined || gphoto2 === null;
-  }
-
-  isConnected(callback) {
-    if (gphoto2 === null) {
-      callback(true);
-      return;
-    }
-
-    this.camera.getConfig(function (err, settings) {
-      if (err) {
-        if (callback) callback(false, 'connection test failed', err);
-      } else {
-        self.camera == undefined; // needs to be reinitialized
-        if (callback) callback(true);
-      }
-      console.log(settings);
-      return settings;
-    });
+    return self.camera !== undefined || gphoto2 === null;
   }
 
   takePicture(callback) {
@@ -109,31 +92,28 @@ class Camera {
     });
   }
 
-  getBattery() {
-    //let self = this;
-    //console.log(this);
+  getSettings() {
     if (self.camera === undefined) {
       callback(-1, 'camera not initialized', null);
       return;
     }
 
     let level = {};
+    let _settings = {};
     self.camera.getConfig(function (err, settings) {
       level = {
         label: settings.main.children.status.children.batterylevel.label,
         value: settings.main.children.status.children.batterylevel.value,
       };
+      _settings = settings;
     });
     return new Promise((resolve) => {
       //resolve(level);
       setTimeout(() => {
-        console.log(level);
-        resolve(level);
+        //console.log(_settings);
+        resolve(_settings);
       }, 20);
     });
-    /* setTimeout(() => {
-      return level;
-    }, 2000); */
   }
 }
 
@@ -141,5 +121,4 @@ class Camera {
  * Module exports for connection
  */
 let camera = new Camera();
-//export { camera as default };
 module.exports = camera;

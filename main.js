@@ -59,11 +59,7 @@ const startCamera = async (res, msg, err) => {
   );
   livePrev.start(); */
 
-  const level = await camera.getBattery();
-  console.log(level);
-  /*  setTimeout(() => {
-    console.log(camera);
-    console.log(level);
-  }, 2000); */
-  mainWindow.webContents.send('settings', level);
+  const settings = await camera.getSettings();
+  //console.log(settings);
+  mainWindow.webContents.send('settings', settings);
 };

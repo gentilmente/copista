@@ -4,12 +4,14 @@ const bulmaCarousel = require('bulma-carousel');
 
 const BulmaNotification = require('./src/scripts/bulma-notifications');
 
+const SM = require('./src/scripts/settingsManager');
+
 contextBridge.exposeInMainWorld('biblioApi', {
   notification: (title, msg, type) => {
     new BulmaNotification().show(title, msg, type);
   },
   onInitCamera: (cb) => ipcRenderer.on('notif:error', cb),
-  onInitCam: (cb) => ipcRenderer.on('settings', cb),
+  //onInitCam: (cb) => ipcRenderer.on('settings', cb),
   //Bulma: ipcRenderer.invoke(new BulmaNotification()),
 });
 
@@ -17,18 +19,18 @@ contextBridge.exposeInMainWorld('biblioApi', {
 // It has the same sandbox as a Chrome extension.
 window.addEventListener('DOMContentLoaded', () => {
   bulmaQuickview.attach();
-
   bulmaCarousel.attach('#carousel-demo', {
     slidesToScroll: 1,
     slidesToShow: 5,
   });
 
-  const replaceText = (selector, text) => {
-    const element = document.getElementById(selector);
-    if (element) element.innerText = text;
-  };
+  ipcRenderer.on('settings', (e, settings) => {
+    console.log(
+      '🚀 ~ file: preload.js ~ line 61 ~ ipcRenderer.on ~ settings',
+      settings.main.children
+    );
 
-  for (const type of ['chrome', 'node', 'electron']) {
-    replaceText(`${type}-version`, process.versions[type]);
-  }
+    const sm = new SM(settings.main.children);
+    sm.populateSettings();
+  });
 });

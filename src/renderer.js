@@ -1,22 +1,15 @@
 console.log('renderer...');
-const bat = document.getElementById('bat');
-const model = document.getElementById('model');
 
 window.biblioApi.onInitCamera((e, msg) => {
-  console.log(
-    '🚀 ~ file: renderer.js ~ line 5 ~ window.biblioApi.onInitCamera ~ msg',
-    msg
-  );
-  model.innerHTML = msg;
   window.biblioApi.notification('oh no!', msg, 'danger');
 });
 
-window.biblioApi.onInitCam((e, level) => {
+/* window.biblioApi.onInitCam((e, settings) => {
   console.log(
     '🚀 ~ file: renderer.js ~ line 14 ~ window.biblioApi.onInitCam ~ msg',
-    level
+    settings
   );
-
-  bat.innerHTML = level.value;
-  window.biblioApi.notification('yes!', level.value, 'success');
-});
+  const value = settings.main.children.status.children.batterylevel.value;
+  bat.innerHTML = value;
+  window.biblioApi.notification('yes!', value, 'success');
+}); */

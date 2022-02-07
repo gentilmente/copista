@@ -3,6 +3,7 @@
 @import '../../node_modules/bulma-o-steps/bulma-steps.min.css';
 @import '../../node_modules/bulma-carousel/dist/css/bulma-carousel.min.css';
 @import '../../node_modules/bulma-quickview/dist/css/bulma-quickview.min.css';
+@import '../../node_modules/bulma-checkradio/dist/css/bulma-checkradio.min.css';
 @import './style.css';
 .live {
   position: relative;
@@ -10,9 +11,10 @@
 li.is-active a {
   color: rgb(100, 225, 11) !important;
 }
-aside.menu a {
+
+/* aside.menu a {
   color: whitesmoke;
-}
+} */
 /* .liveview {
   height: 800px;
 } */

@@ -67,16 +67,17 @@
           </header>
 
           <div class="quickview-body">
-            <div class="quickview-block">
-              ... cosas mas sadfsd
-              <figure class="image">
-                <img src="../assets/histogram.webp" />
-              </figure>
-            </div>
-            <figure class="image">
-              <img src="../assets/histogram.webp" />
-            </figure>
+            <ul class="menu-list" id="settings-panel">
+              <li>
+                <figure class="image">
+                  <img src="../assets/histogram.webp" />
+                </figure>
+              </li>
+            </ul>
           </div>
+
+          <!-- <div class="quickview-body"></div>
+          <div class="quickview-body"></div> -->
 
           <footer class="quickview-footer has-background-dark">
             foooteeerrrr
@@ -88,18 +89,26 @@
           data-show="quickview"
           data-target="quickviewDefault"
         >
-          Show quickview
+          Mostrar settings
         </button>
 
         <aside class="menu">
-          <p class="menu-label has-text-light">Cámara info</p>
+          <p class="menu-label">Cámara info</p>
           <ul class="menu-list">
-            <li id="marca">Nikon</li>
-            <li id="model">D5100</li>
+            <!--  <li id="manufacturer">*</li>
+            <li id="cameramodel">*</li>
+            <li id="acpower">*</li>
+            <li><label id="batterylevel">*%</label></li>
             <li>
-              Batería: <strong class="has-text-light" id="bat">0%</strong>
-            </li>
-            <li>Autofoco : on</li>
+              <input
+                class="is-checkradio is-rtl is-white"
+                id="aflocked"
+                type="checkbox"
+                name="exampleCheckbox"
+                checked="checked"
+              />
+              <label for="aflocked">*</label>
+            </li> -->
             <p class="menu-label has-text-light">Foto</p>
             <li>
               <a>Diafragma: 16</a>
