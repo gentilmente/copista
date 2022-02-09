@@ -1,40 +1,57 @@
+const statusPropWanted = [
+  'manufacturer',
+  'cameramodel',
+  //'acpower',
+  'batterylevel',
+  //'aflocked',
+  //'orientation', not in Canon
+];
+const capturePropsWanted = [
+  'expprogram',
+  'f-number', //aperture canon
+  'focallength',
+  'focusmode',
+  'imagequality',
+  'shutterspeed',
+  'shutterspeed2',
+];
+const imagePropsWanted = [
+  //'imagesize',
+  'imageformat',
+  'iso',
+  'whitebalance',
+];
 class SettingsManager {
-  STATUS_PROPS_WANTED = [
-    'manufacturer',
-    'cameramodel',
-    //'acpower',
-    'batterylevel',
-    //'aflocked',
-    //'orientation', not in Canon
-  ];
-  CAPTURE_PROPS_WANTED = [
-    'expprogram',
-    'f-number', //aperture canon
-    'focallength',
-    'focusmode',
-    'imagequality',
-    'shutterspeed',
-    'shutterspeed2',
-  ];
-  IMAGE_PROPS_WANTED = [
-    //'imagesize',
-    'imageformat',
-    'iso',
-    'whitebalance',
-  ];
+  getWantedProps() {
+    return { statusPropWanted, capturePropsWanted, imagePropsWanted };
+  }
+
   constructor(settings) {
     Object.assign(this, settings);
   }
-  populateSettings() {
-    /*     
-    const statusProps = pickProperties(
-      this.status.children,
-      this.STATUS_PROPS_WANTED
-    ); */
-    const statusProps = this.status.children;
-    let menuElem = document.getElementById('settings-panel');
 
-    for (const key in statusProps) {
+  populateSettings(menuElem) {
+    if (menuElem.id === 'all-settings-panel') {
+      for (const key in this) {
+        if (Object.hasOwn(this, key)) {
+          const element = this[key];
+          const props = element.children;
+          const title = createElement('p', {
+            class: 'subtitle has-text-light',
+          });
+          title.innerText = element.label;
+          this.insertProps(props, menuElem);
+          menuElem.prepend(title);
+        }
+      }
+    } else {
+      const props = pickProperties(this.status.children, statusPropWanted);
+      this.insertProps(props, menuElem);
+    }
+  }
+
+  insertProps(props, menuElem) {
+    for (const key in props) {
       const propName = `${key}-chkbox`;
       const input = createElement('input', {
         class: 'is-checkradio is-white',
@@ -45,12 +62,15 @@ class SettingsManager {
         for: propName,
       });
 
-      const o = statusProps[key];
+      const o = props[key];
       label.innerText = o.label + ': ' + o.value;
-      if (this.STATUS_PROPS_WANTED.includes(key)) {
+      if (statusPropWanted.includes(key)) {
         input.setAttribute('checked', '');
       }
-      const newPropEl = createElement('li', null, [input, label]);
+      const newPropEl = createElement('div', { class: 'list-item' }, [
+        input,
+        label,
+      ]);
       menuElem.prepend(newPropEl);
     }
   }

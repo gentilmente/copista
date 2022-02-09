@@ -25,12 +25,13 @@ window.addEventListener('DOMContentLoaded', () => {
   });
 
   ipcRenderer.on('settings', (e, settings) => {
-    console.log(
-      '🚀 ~ file: preload.js ~ line 61 ~ ipcRenderer.on ~ settings',
-      settings.main.children
-    );
-
     const sm = new SM(settings.main.children);
-    sm.populateSettings();
+    let menuElem = document.getElementById('all-settings-panel');
+    //params: el menu y el array de settings y los elem
+    sm.populateSettings(menuElem);
+
+    //console.log(sm.getWantedProps());
+    menuElem = document.getElementById('settings-panel');
+    sm.populateSettings(menuElem);
   });
 });

@@ -62,26 +62,19 @@
           class="quickview has-background-dark is-left"
         >
           <header class="quickview-header">
-            <p class="title has-text-light">Cámara</p>
+            <p class="title has-text-light">Configuración de cámara</p>
             <span class="delete" data-dismiss="quickview"></span>
           </header>
 
           <div class="quickview-body">
-            <ul class="menu-list" id="settings-panel">
-              <li>
-                <figure class="image">
-                  <img src="../assets/histogram.webp" />
-                </figure>
-              </li>
-            </ul>
+            <div class="quickview-block">
+              <div class="list has-text-light" id="all-settings-panel"></div>
+            </div>
           </div>
 
-          <!-- <div class="quickview-body"></div>
-          <div class="quickview-body"></div> -->
-
-          <footer class="quickview-footer has-background-dark">
+          <!-- <footer class="quickview-footer has-background-dark">
             foooteeerrrr
-          </footer>
+          </footer> -->
         </div>
 
         <button
@@ -89,26 +82,12 @@
           data-show="quickview"
           data-target="quickviewDefault"
         >
-          Mostrar settings
+          Configuración
         </button>
 
         <aside class="menu">
           <p class="menu-label">Cámara info</p>
-          <ul class="menu-list">
-            <!--  <li id="manufacturer">*</li>
-            <li id="cameramodel">*</li>
-            <li id="acpower">*</li>
-            <li><label id="batterylevel">*%</label></li>
-            <li>
-              <input
-                class="is-checkradio is-rtl is-white"
-                id="aflocked"
-                type="checkbox"
-                name="exampleCheckbox"
-                checked="checked"
-              />
-              <label for="aflocked">*</label>
-            </li> -->
+          <ul class="menu-list" id="settings-panel">
             <p class="menu-label has-text-light">Foto</p>
             <li>
               <a>Diafragma: 16</a>
