@@ -68,7 +68,7 @@ class SettingsManager {
       if (statusPropWanted.includes(key)) {
         input.setAttribute('checked', '');
       }
-      const newPropEl = createElement('div', { class: 'list-item' }, [
+      const newPropEl = createElement('li', { class: 'list-item' }, [
         input,
         label,
       ]);

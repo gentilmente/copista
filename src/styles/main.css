@@ -6,13 +6,15 @@
 @import '../../node_modules/bulma-quickview/dist/css/bulma-quickview.min.css';
 @import '../../node_modules/bulma-checkradio/dist/css/bulma-checkradio.min.css';
 @import './style.css';
-.live {
-  position: relative;
-}
 li.is-active a {
   color: rgb(100, 225, 11) !important;
 }
-
+.canvas {
+  max-width: 80%;
+}
+.live {
+  position: relative;
+}
 /* aside.menu a {
   color: whitesmoke;
 } */

@@ -13,8 +13,8 @@
     <script defer type="module" src="./renderer.js"></script>
   </head>
 
-  <body class="has-background-dark has-text-light">
-    <div class="columns is-vcentered">
+  <body class="has-background-dark">
+    <div class="columns is-vcentered has-text-light">
       <div class="column">
         <p class="tag is-medium">Carpeta/folio #CD3435-DSFG-2018</p>
       </div>
@@ -55,7 +55,7 @@
       </div>
     </div>
 
-    <div class="columns">
+    <div class="columns has-text-light">
       <div class="column">
         <div
           id="quickviewDefault"
@@ -102,34 +102,23 @@
           </button>
         </div>
         <aside class="menu">
-          <br />
           <p class="menu-label has-text-light">Cámara info</p>
-          <ul class="menu-list" id="settings-panel">
-            <p class="menu-label has-text-light">Foto</p>
-            <li>
-              <a>Diafragma: 16</a>
-              <ul>
-                <li>
-                  <a>node <span id="node-version"></span></a>
-                </li>
-                <li>
-                  <a>chrome <span id="chrome-version"></span></a>
-                </li>
-                <li>
-                  <a>electron <span id="electron-version"></span></a>
-                </li>
-              </ul>
-            </li>
-            <li>
-              <figure class="image">
-                <img src="../assets/histogram.webp" />
-              </figure>
-            </li>
+          <ul class="menu-list" id="settings-panel"></ul>
+          <p class="menu-label has-text-light">Foto info</p>
+          <ul class="menu-list">
+            <li class="list-item">Apertura: 234</li>
+            <li class="list-item">ISO: 400</li>
+            <li class="list-item">Velocidad: f/125</li>
+            <li class="list-item">Longitud Focal: 18 mm</li>
           </ul>
+          <br />
+          <figure class="image">
+            <img src="../assets/histogram.webp" />
+          </figure>
         </aside>
       </div>
       <div class="column is-10">
-        <div class="canvas">
+        <div class="container is-max-desktop canvas">
           <figure id="live" class="image">
             <img id="img" src="../assets/IMG_0156.JPG" />
           </figure>
