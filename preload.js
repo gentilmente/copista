@@ -13,6 +13,13 @@ contextBridge.exposeInMainWorld('biblioApi', {
   onInitCamera: (cb) => ipcRenderer.on('notif:error', cb),
   //onInitCam: (cb) => ipcRenderer.on('settings', cb),
   //Bulma: ipcRenderer.invoke(new BulmaNotification()),
+  showLiveView: () => {
+    ipcRenderer.send('liveview', () => {});
+  },
+  capture: () => {
+    ipcRenderer.send('capture');
+  },
+  getImage: () => ipcRenderer.send('chooseFile'),
 });
 
 // All of the Node.js APIs are available in the preload process.
@@ -34,4 +41,15 @@ window.addEventListener('DOMContentLoaded', () => {
     menuElem = document.getElementById('settings-panel');
     sm.populateSettings(menuElem);
   });
+});
+
+// handle response
+ipcRenderer.on('chosenFile', (event, base64) => {
+  const src = `data:image/jpg;base64,${base64}`;
+
+  const img = document.getElementById('img');
+  img.src = src;
+
+  /* const div = document.getElementById('div');
+  div.innerText = src; */
 });

@@ -5,7 +5,7 @@
     <!-- https://developer.mozilla.org/en-US/docs/Web/HTTP/CSP -->
     <meta
       http-equiv="Content-Security-Policy"
-      content="default-src 'self'; script-src 'self'"
+      content="img-src 'self' data:; default-src 'self'; script-src 'self'"
     />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link rel="stylesheet" href="./styles/main.css" />
@@ -90,9 +90,14 @@
           <!-- <i class="fa-solid fa-wrench"></i>
             <i class="fa-solid fa-list-check"></i> -->
 
-          <button id="capturar" class="button">
+          <button id="liveview" class="button">
             <span class="icon">
               <i class="fa-solid fa-camera"></i>
+            </span>
+          </button>
+          <button id="open" class="button">
+            <span class="icon">
+              <i class="fa-solid fa-folder"></i>
             </span>
           </button>
         </div>
@@ -124,9 +129,9 @@
         </aside>
       </div>
       <div class="column is-10">
-        <div class="liveview">
+        <div class="canvas">
           <figure id="live" class="image">
-            <img src="../assets/1100x550.jpg" />
+            <img id="img" src="../assets/1100x550.jpg" />
           </figure>
         </div>
       </div>

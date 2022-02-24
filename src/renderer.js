@@ -13,3 +13,23 @@ window.biblioApi.onInitCamera((e, msg) => {
   bat.innerHTML = value;
   window.biblioApi.notification('yes!', value, 'success');
 }); */
+
+const liveView = document.getElementById('liveview');
+liveView.addEventListener('click', (e) => {
+  window.biblioApi.notification('error', e, 'danger');
+});
+
+document.addEventListener('keyup', (event) => {
+  if (event.code === 'Space') {
+    biblioApi.capture();
+  }
+});
+
+const setButton = document.getElementById('open');
+//const titleInput = document.getElementById('title')
+
+setButton.addEventListener('click', () => {
+  //const title = titleInput.value
+  //API.setTitle(title)
+  biblioApi.getImage();
+});

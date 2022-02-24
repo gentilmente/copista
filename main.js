@@ -1,6 +1,8 @@
 // Modules to control application life and create native browser window
-const { app, BrowserWindow } = require('electron');
+const { app, BrowserWindow, ipcMain, dialog } = require('electron');
 const path = require('path');
+const fs = require('fs');
+
 const camera = require('./src/scripts/camera');
 const livePreview = require('./src/scripts/live-preview');
 
@@ -63,3 +65,19 @@ const startCamera = async (res, msg, err) => {
   //console.log(settings);
   mainWindow.webContents.send('settings', settings);
 };
+
+ipcMain.on('chooseFile', (event, arg) => {
+  const result = dialog.showOpenDialog({
+    properties: ['openFile'],
+    filters: [{ name: 'Images', extensions: ['png', 'jpg', 'jpeg'] }],
+  });
+
+  result
+    .then(({ canceled, filePaths, bookmarks }) => {
+      const base64 = fs.readFileSync(filePaths[0]).toString('base64');
+      event.reply('chosenFile', base64);
+    })
+    .catch((e) => {
+      console.log(e);
+    });
+});
