@@ -9,12 +9,15 @@
 li.is-active a {
   color: rgb(100, 225, 11) !important;
 }
-.canvas {
-  max-width: 80%;
+img.canvas {
+  height: 70vh;
+  object-fit: contain;
 }
+
+/* 
 .live {
   position: relative;
-}
+} */
 /* aside.menu a {
   color: whitesmoke;
 } */
