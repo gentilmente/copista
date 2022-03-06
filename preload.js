@@ -1,4 +1,5 @@
 const { contextBridge, ipcRenderer } = require('electron');
+
 const bulmaQuickview = require('bulma-quickview');
 const bulmaCarousel = require('bulma-carousel');
 
@@ -44,12 +45,9 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 // handle response
-ipcRenderer.on('chosenFile', (event, base64) => {
+ipcRenderer.on('chosenFile', (event, base64, filePath) => {
   const src = `data:image/jpg;base64,${base64}`;
-
   const img = document.getElementById('img');
   img.src = src;
-
-  /* const div = document.getElementById('div');
-  div.innerText = src; */
+  document.getElementById('path').innerText = filePath;
 });

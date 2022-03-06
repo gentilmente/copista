@@ -75,7 +75,8 @@ ipcMain.on('chooseFile', (event, arg) => {
   result
     .then(({ canceled, filePaths, bookmarks }) => {
       const base64 = fs.readFileSync(filePaths[0]).toString('base64');
-      event.reply('chosenFile', base64);
+      const filePath = path.basename(filePaths[0]);
+      event.reply('chosenFile', base64, filePath);
     })
     .catch((e) => {
       console.log(e);
