@@ -20,7 +20,7 @@ contextBridge.exposeInMainWorld('biblioApi', {
   capture: () => {
     ipcRenderer.send('capture');
   },
-  getImage: () => ipcRenderer.send('chooseFile'),
+  getImage: () => ipcRenderer.invoke('pickFile'),
 });
 
 // All of the Node.js APIs are available in the preload process.
@@ -42,12 +42,4 @@ window.addEventListener('DOMContentLoaded', () => {
     menuElem = document.getElementById('settings-panel');
     sm.populateSettings(menuElem);
   });
-});
-
-// handle response
-ipcRenderer.on('chosenFile', (event, base64, filePath) => {
-  const src = `data:image/jpg;base64,${base64}`;
-  const img = document.getElementById('img');
-  img.src = src;
-  document.getElementById('path').innerText = filePath;
 });

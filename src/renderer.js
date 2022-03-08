@@ -25,11 +25,15 @@ document.addEventListener('keyup', (event) => {
   }
 });
 
-const setButton = document.getElementById('open');
-//const titleInput = document.getElementById('title')
+const btnOpenFile = document.getElementById('open');
 
-setButton.addEventListener('click', () => {
-  //const title = titleInput.value
-  //API.setTitle(title)
-  biblioApi.getImage();
+btnOpenFile.addEventListener('click', async () => {
+  await biblioApi.getImage().then((obj) => {
+    //console.log(obj);
+    const src = `data:image/jpg;base64,${obj.selectedSrc}`;
+    const img = document.getElementById('img');
+    img.src = src;
+
+    document.getElementById('path').innerText = obj.selectedName;
+  });
 });

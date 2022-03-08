@@ -66,19 +66,33 @@ const startCamera = async (res, msg, err) => {
   mainWindow.webContents.send('settings', settings);
 };
 
-ipcMain.on('chooseFile', (event, arg) => {
-  const result = dialog.showOpenDialog({
-    properties: ['openFile'],
-    filters: [{ name: 'Images', extensions: ['png', 'jpg', 'jpeg'] }],
-  });
-
-  result
-    .then(({ canceled, filePaths, bookmarks }) => {
-      const base64 = fs.readFileSync(filePaths[0]).toString('base64');
-      const filePath = path.basename(filePaths[0]);
-      event.reply('chosenFile', base64, filePath);
+ipcMain.handle('pickFile', async () => {
+  const obj = { selectedSrc: '', selectedName: '', allSrcInFolder: [] };
+  return dialog
+    .showOpenDialog({
+      properties: ['openFile'],
+      filters: [{ name: 'Images', extensions: ['png', 'jpg', 'jpeg'] }],
     })
-    .catch((e) => {
-      console.log(e);
-    });
+    .then((result) => {
+      if (result.canceled) return;
+      obj.selectedSrc = fs.readFileSync(result.filePaths[0], {
+        encoding: 'base64',
+      });
+      obj.selectedName = path.basename(result.filePaths[0]);
+      return path.dirname(result.filePaths[0]);
+    })
+    .then(async (dir) => {
+      obj.allSrcInFolder = await fs.promises
+        .readdir(dir, { withFileTypes: true })
+        .then((dirents) =>
+          dirents
+            .filter((dirent) => dirent.isFile() && !dirent.name.startsWith('.'))
+            .map(({ name }) => path.resolve(dir, name))
+            .map((file) => fs.readFileSync(file, { encoding: 'base64' }))
+        )
+        .catch((err) => console.log(err));
+      //console.log(obj);
+      return obj;
+    })
+    .catch((err) => console.log(err));
 });
