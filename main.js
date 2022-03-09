@@ -75,20 +75,24 @@ ipcMain.handle('pickFile', async () => {
     })
     .then((result) => {
       if (result.canceled) return;
-      obj.selectedSrc = fs.readFileSync(result.filePaths[0], {
+      obj.selectedSrc = result.filePaths[0];
+      /* obj.selectedSrc = fs.readFileSync(result.filePaths[0], {
         encoding: 'base64',
-      });
+      }); */
       obj.selectedName = path.basename(result.filePaths[0]);
       return path.dirname(result.filePaths[0]);
     })
     .then(async (dir) => {
       obj.allSrcInFolder = await fs.promises
         .readdir(dir, { withFileTypes: true })
-        .then((dirents) =>
-          dirents
-            .filter((dirent) => dirent.isFile() && !dirent.name.startsWith('.'))
-            .map(({ name }) => path.resolve(dir, name))
-            .map((file) => fs.readFileSync(file, { encoding: 'base64' }))
+        .then(
+          (dirents) =>
+            dirents
+              .filter(
+                (dirent) => dirent.isFile() && !dirent.name.startsWith('.')
+              )
+              .map(({ name }) => path.resolve(dir, name))
+          //.map((file) => fs.readFileSync(file, { encoding: 'base64' }))
         )
         .catch((err) => console.log(err));
       //console.log(obj);

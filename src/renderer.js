@@ -29,6 +29,17 @@ const btnOpenFile = document.getElementById('open');
 
 btnOpenFile.addEventListener('click', async () => {
   await biblioApi.getImage().then((obj) => {
+    console.log(obj);
+    const src = obj.selectedSrc;
+    const img = document.getElementById('img');
+    img.src = src;
+
+    document.getElementById('path').innerText = obj.selectedName;
+  });
+});
+/* 
+btnOpenFile.addEventListener('click', async () => {
+  await biblioApi.getImage().then((obj) => {
     //console.log(obj);
     const src = `data:image/jpg;base64,${obj.selectedSrc}`;
     const img = document.getElementById('img');
@@ -36,4 +47,4 @@ btnOpenFile.addEventListener('click', async () => {
 
     document.getElementById('path').innerText = obj.selectedName;
   });
-});
+}); */
