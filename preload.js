@@ -21,16 +21,22 @@ contextBridge.exposeInMainWorld('biblioApi', {
     ipcRenderer.send('capture');
   },
   getImage: () => ipcRenderer.invoke('pickFile'),
+  attachCarousel: () => {
+    bulmaCarousel.attach('#carousel-demo', {
+      slidesToScroll: 1,
+      slidesToShow: 5,
+    });
+  },
 });
 
 // All of the Node.js APIs are available in the preload process.
 // It has the same sandbox as a Chrome extension.
 window.addEventListener('DOMContentLoaded', () => {
   bulmaQuickview.attach();
-  bulmaCarousel.attach('#carousel-demo', {
+  /* bulmaCarousel.attach('#carousel-demo', {
     slidesToScroll: 1,
     slidesToShow: 5,
-  });
+  }); */
 
   ipcRenderer.on('settings', (e, settings) => {
     const sm = new SM(settings.main.children);

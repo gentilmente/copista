@@ -1,18 +1,8 @@
-console.log('renderer...');
+import CM from './scripts/carouselManager.js';
 
 window.biblioApi.onInitCamera((e, msg) => {
   window.biblioApi.notification('oh no!', msg, 'danger');
 });
-
-/* window.biblioApi.onInitCam((e, settings) => {
-  console.log(
-    '🚀 ~ file: renderer.js ~ line 14 ~ window.biblioApi.onInitCam ~ msg',
-    settings
-  );
-  const value = settings.main.children.status.children.batterylevel.value;
-  bat.innerHTML = value;
-  window.biblioApi.notification('yes!', value, 'success');
-}); */
 
 const liveView = document.getElementById('liveview');
 liveView.addEventListener('click', (e) => {
@@ -22,6 +12,8 @@ liveView.addEventListener('click', (e) => {
 document.addEventListener('keyup', (event) => {
   if (event.code === 'Space') {
     biblioApi.capture();
+    console.log('space');
+    biblioApi.attachCarousel();
   }
 });
 
@@ -29,22 +21,15 @@ const btnOpenFile = document.getElementById('open');
 
 btnOpenFile.addEventListener('click', async () => {
   await biblioApi.getImage().then((obj) => {
-    console.log(obj);
+    //console.log(obj);
     const src = obj.selectedSrc;
     const img = document.getElementById('img');
     img.src = src;
 
     document.getElementById('path').innerText = obj.selectedName;
+    const carouselElem = document.querySelector('#carousel-demo');
+    const cm = new CM(obj.allSrcInFolder);
+    cm.populateImages(carouselElem);
   });
+  biblioApi.attachCarousel();
 });
-/* 
-btnOpenFile.addEventListener('click', async () => {
-  await biblioApi.getImage().then((obj) => {
-    //console.log(obj);
-    const src = `data:image/jpg;base64,${obj.selectedSrc}`;
-    const img = document.getElementById('img');
-    img.src = src;
-
-    document.getElementById('path').innerText = obj.selectedName;
-  });
-}); */
