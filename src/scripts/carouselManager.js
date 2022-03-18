@@ -4,7 +4,6 @@ class CarouselManager {
   }
 
   populateImages(carouselElem) {
-    console.log(carouselElem);
     for (let i = 0; i < this.sources.length; i++) {
       const src = this.sources[i];
       const itemEl = createElement('div', {

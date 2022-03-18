@@ -13,7 +13,7 @@ document.addEventListener('keyup', (event) => {
   if (event.code === 'Space') {
     biblioApi.capture();
     console.log('space');
-    biblioApi.attachCarousel();
+    biblioApi.kill(event);
   }
 });
 

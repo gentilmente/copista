@@ -6,26 +6,29 @@ const bulmaCarousel = require('bulma-carousel');
 const BulmaNotification = require('./src/scripts/bulma-notifications');
 
 const SM = require('./src/scripts/settingsManager');
-
+let carru = '';
 contextBridge.exposeInMainWorld('biblioApi', {
-  notification: (title, msg, type) => {
-    new BulmaNotification().show(title, msg, type);
-  },
+  notification: (title, msg, type) =>
+    new BulmaNotification().show(title, msg, type),
   onInitCamera: (cb) => ipcRenderer.on('notif:error', cb),
   //onInitCam: (cb) => ipcRenderer.on('settings', cb),
   //Bulma: ipcRenderer.invoke(new BulmaNotification()),
-  showLiveView: () => {
-    ipcRenderer.send('liveview', () => {});
-  },
-  capture: () => {
-    ipcRenderer.send('capture');
-  },
+  showLiveView: () => ipcRenderer.send('liveview', () => {}),
+  capture: () => ipcRenderer.send('capture'),
   getImage: () => ipcRenderer.invoke('pickFile'),
-  attachCarousel: () => {
-    bulmaCarousel.attach('#carousel-demo', {
+  attachCarousel: (e) => {
+    console.log(e);
+    carru = bulmaCarousel.attach('#carousel-demo', {
       slidesToScroll: 1,
       slidesToShow: 5,
     });
+  },
+  kill: function (e) {
+    console.log('kill', e);
+    const elem = document.getElementById('carousel-demo');
+    console.log(elem);
+    elem.replaceChildren();
+    console.log(carru);
   },
 });
 
@@ -49,3 +52,9 @@ window.addEventListener('DOMContentLoaded', () => {
     sm.populateSettings(menuElem);
   });
 });
+
+function deleteNodes(params) {
+  //const selectedTransferOptions = document.querySelectorAll('#no option:checked');
+  //const existingYesOptions = document.querySelectorAll('#yes option');
+  yesSelect.replaceChildren(...params);
+}

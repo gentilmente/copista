@@ -16,11 +16,21 @@ img.canvas {
   height: 70vh;
   object-fit: contain;
 }
+.columns {
+  border-bottom: 1px solid rgb(100, 100, 100);
+}
+.columns:not(:last-child) {
+  margin-bottom: 0px;
+}
+.container.is-fluid {
+  padding-top: 15px;
+  padding-left: 20px;
+  padding-right: 20px;
+}
 
-/* 
 .live {
   position: relative;
-} */
+}
 /* aside.menu a {
   color: whitesmoke;
 } */
