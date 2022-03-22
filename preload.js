@@ -22,8 +22,7 @@ contextBridge.exposeInMainWorld('biblioApi', {
       slidesToShow: 5,
     });
   },
-  killCarousel: function () {
-    const elem = document.querySelector('#carousel-demo');
+  killCarousel: function (elem) {
     if (Array.isArray(carru.instance)) {
       elem.replaceChildren();
       delete carru.instance;

@@ -1,7 +1,7 @@
 import CM from './scripts/carouselManager.js';
 
-window.biblioApi.onInitCamera((e, msg) => {
-  window.biblioApi.notification('oh no!', msg, 'danger');
+biblioApi.onInitCamera((e, msg) => {
+  biblioApi.notification('oh no!', msg, 'danger');
 });
 
 const liveView = document.getElementById('liveview');
@@ -10,16 +10,6 @@ const btnOpenFile = document.getElementById('open');
 
 liveView.addEventListener('click', (e) => {
   window.biblioApi.notification('error', e, 'danger');
-});
-
-document.addEventListener('keyup', (event) => {
-  console.log(event);
-  if (event.code === 'Space') {
-    //biblioApi.capture();
-    console.log('space');
-    event.preventDefault();
-    //biblioApi.kill();
-  }
 });
 
 btnOpenFile.addEventListener('click', (evt) => {
@@ -35,7 +25,23 @@ btnOpenFile.addEventListener('click', (evt) => {
       document.getElementById('path').innerText = obj.selectedName;
       const cm = new CM(obj.allSrcInFolder);
       cm.populateImages(carouselElem);
+      const imgs = document.querySelectorAll('img');
+      imgs.forEach((img) =>
+        img.addEventListener('click', (e) =>
+          console.log('clicked', e.target.src)
+        )
+      );
     })
-    .then(biblioApi.killCarousel())
+    .then(biblioApi.killCarousel(carouselElem))
     .then(() => biblioApi.attachCarousel(carouselElem));
 });
+
+/* document.addEventListener('keyup', (event) => {
+  console.log(event);
+  if (event.code === 'Space') {
+    //biblioApi.capture();
+    console.log('space');
+    event.preventDefault();
+    //biblioApi.kill();
+  }
+}); */

@@ -15,7 +15,7 @@ app.whenReady().then(() => {
   app.allowRendererProcessReuse = false;
   mainWindow = new BrowserWindow({
     width: 1400,
-    height: 800,
+    height: 830,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
