@@ -26,14 +26,21 @@ btnOpenFile.addEventListener('click', (evt) => {
       const cm = new CM(obj.allSrcInFolder);
       cm.populateImages(carouselElem);
       const imgs = document.querySelectorAll('img');
-      imgs.forEach((img) =>
-        img.addEventListener('click', (e) =>
-          console.log('clicked', e.target.src)
-        )
+      imgs.forEach((thumbnail) =>
+        thumbnail.addEventListener('click', (e) => (img.src = e.target.src))
       );
     })
     .then(biblioApi.killCarousel(carouselElem))
-    .then(() => biblioApi.attachCarousel(carouselElem));
+    .then(() => biblioApi.attachCarousel(carouselElem))
+    .then(() => {
+      document.addEventListener('keyup', (e) => {
+        if (e.key === 'ArrowRight') {
+          biblioApi.next();
+        } else if (e.key === 'ArrowLeft') {
+          biblioApi.prev();
+        }
+      });
+    });
 });
 
 /* document.addEventListener('keyup', (event) => {

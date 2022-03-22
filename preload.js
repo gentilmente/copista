@@ -29,6 +29,8 @@ contextBridge.exposeInMainWorld('biblioApi', {
       //carru.instance[0] = undefined;
     }
   },
+  next: () => carru.instance[0].next(),
+  prev: () => carru.instance[0].previous(),
 });
 
 // All of the Node.js APIs are available in the preload process.
