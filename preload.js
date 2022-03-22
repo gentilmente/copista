@@ -22,7 +22,7 @@ contextBridge.exposeInMainWorld('biblioApi', {
       slidesToShow: 5,
     });
   },
-  kill: function () {
+  killCarousel: function () {
     const elem = document.querySelector('#carousel-demo');
     if (Array.isArray(carru.instance)) {
       elem.replaceChildren();
@@ -36,10 +36,6 @@ contextBridge.exposeInMainWorld('biblioApi', {
 // It has the same sandbox as a Chrome extension.
 window.addEventListener('DOMContentLoaded', () => {
   bulmaQuickview.attach();
-  /* bulmaCarousel.attach('#carousel-demo', {
-    slidesToScroll: 1,
-    slidesToShow: 5,
-  }); */
 
   ipcRenderer.on('settings', (e, settings) => {
     const sm = new SM(settings.main.children);
@@ -52,9 +48,3 @@ window.addEventListener('DOMContentLoaded', () => {
     sm.populateSettings(menuElem);
   });
 });
-
-function deleteNodes(params) {
-  //const selectedTransferOptions = document.querySelectorAll('#no option:checked');
-  //const existingYesOptions = document.querySelectorAll('#yes option');
-  yesSelect.replaceChildren(...params);
-}

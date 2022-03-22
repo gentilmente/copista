@@ -5,6 +5,9 @@ window.biblioApi.onInitCamera((e, msg) => {
 });
 
 const liveView = document.getElementById('liveview');
+const carouselElem = document.querySelector('#carousel-demo');
+const btnOpenFile = document.getElementById('open');
+
 liveView.addEventListener('click', (e) => {
   window.biblioApi.notification('error', e, 'danger');
 });
@@ -18,12 +21,6 @@ document.addEventListener('keyup', (event) => {
     //biblioApi.kill();
   }
 });
-
-const carouselElem = document.querySelector('#carousel-demo');
-const evento = new Event('kill');
-carouselElem.addEventListener('kill', () => biblioApi.kill());
-
-const btnOpenFile = document.getElementById('open');
 
 btnOpenFile.addEventListener('click', (evt) => {
   evt.preventDefault();
@@ -39,6 +36,6 @@ btnOpenFile.addEventListener('click', (evt) => {
       const cm = new CM(obj.allSrcInFolder);
       cm.populateImages(carouselElem);
     })
-    .then(setTimeout(() => carouselElem.dispatchEvent(evento), 50))
+    .then(biblioApi.killCarousel())
     .then(() => biblioApi.attachCarousel(carouselElem));
 });
