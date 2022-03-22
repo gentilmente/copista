@@ -10,26 +10,35 @@ liveView.addEventListener('click', (e) => {
 });
 
 document.addEventListener('keyup', (event) => {
+  console.log(event);
   if (event.code === 'Space') {
-    biblioApi.capture();
+    //biblioApi.capture();
     console.log('space');
-    biblioApi.kill(event);
+    event.preventDefault();
+    //biblioApi.kill();
   }
 });
 
+const carouselElem = document.querySelector('#carousel-demo');
+const evento = new Event('kill');
+carouselElem.addEventListener('kill', () => biblioApi.kill());
+
 const btnOpenFile = document.getElementById('open');
 
-btnOpenFile.addEventListener('click', async () => {
-  await biblioApi.getImage().then((obj) => {
-    //console.log(obj);
-    const src = obj.selectedSrc;
-    const img = document.getElementById('img');
-    img.src = src;
+btnOpenFile.addEventListener('click', (evt) => {
+  evt.preventDefault();
+  biblioApi
+    .getImage()
+    .then((obj) => {
+      //console.log(obj);
+      const src = obj.selectedSrc;
+      const img = document.getElementById('img');
+      img.src = src;
 
-    document.getElementById('path').innerText = obj.selectedName;
-    const carouselElem = document.querySelector('#carousel-demo');
-    const cm = new CM(obj.allSrcInFolder);
-    cm.populateImages(carouselElem);
-  });
-  biblioApi.attachCarousel();
+      document.getElementById('path').innerText = obj.selectedName;
+      const cm = new CM(obj.allSrcInFolder);
+      cm.populateImages(carouselElem);
+    })
+    .then(setTimeout(() => carouselElem.dispatchEvent(evento), 50))
+    .then(() => biblioApi.attachCarousel(carouselElem));
 });

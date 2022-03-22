@@ -6,7 +6,7 @@ const bulmaCarousel = require('bulma-carousel');
 const BulmaNotification = require('./src/scripts/bulma-notifications');
 
 const SM = require('./src/scripts/settingsManager');
-let carru = '';
+let carru = {};
 contextBridge.exposeInMainWorld('biblioApi', {
   notification: (title, msg, type) =>
     new BulmaNotification().show(title, msg, type),
@@ -16,19 +16,19 @@ contextBridge.exposeInMainWorld('biblioApi', {
   showLiveView: () => ipcRenderer.send('liveview', () => {}),
   capture: () => ipcRenderer.send('capture'),
   getImage: () => ipcRenderer.invoke('pickFile'),
-  attachCarousel: (e) => {
-    console.log(e);
-    carru = bulmaCarousel.attach('#carousel-demo', {
+  attachCarousel: (elem) => {
+    carru.instance = bulmaCarousel.attach(elem, {
       slidesToScroll: 1,
       slidesToShow: 5,
     });
   },
-  kill: function (e) {
-    console.log('kill', e);
-    const elem = document.getElementById('carousel-demo');
-    console.log(elem);
-    elem.replaceChildren();
-    console.log(carru);
+  kill: function () {
+    const elem = document.querySelector('#carousel-demo');
+    if (Array.isArray(carru.instance)) {
+      elem.replaceChildren();
+      delete carru.instance;
+      //carru.instance[0] = undefined;
+    }
   },
 });
 
