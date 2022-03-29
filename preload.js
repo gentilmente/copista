@@ -1,4 +1,5 @@
 const { contextBridge, ipcRenderer } = require('electron');
+const livePreview = require('./src/scripts/live-preview');
 
 const bulmaQuickview = require('bulma-quickview');
 const bulmaCarousel = require('bulma-carousel');
@@ -11,9 +12,7 @@ contextBridge.exposeInMainWorld('biblioApi', {
   notification: (title, msg, type) =>
     new BulmaNotification().show(title, msg, type),
   onInitCamera: (cb) => ipcRenderer.on('notif:error', cb),
-  //onInitCam: (cb) => ipcRenderer.on('settings', cb),
-  //Bulma: ipcRenderer.invoke(new BulmaNotification()),
-  showLiveView: () => ipcRenderer.send('liveview', () => {}),
+  showLiveView: () => ipcRenderer.invoke('liveview'),
   capture: () => ipcRenderer.send('capture'),
   getImage: () => ipcRenderer.invoke('pickFile'),
   attachCarousel: (elem) => {

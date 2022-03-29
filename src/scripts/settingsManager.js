@@ -31,7 +31,7 @@ class SettingsManager {
   }
 
   populateSettings(menuElem) {
-    console.log(this);
+    //console.log(this);
     if (menuElem.id === 'all-settings-panel') {
       for (const key in this) {
         if (Object.hasOwn(this, key)) {

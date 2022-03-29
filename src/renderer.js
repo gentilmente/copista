@@ -1,33 +1,45 @@
 import CM from './scripts/carouselManager.js';
 
+let running = false;
+
 biblioApi.onInitCamera((e, msg) => {
   biblioApi.notification('oh no!', msg, 'danger');
 });
 
-const liveView = document.getElementById('liveview');
+const live = document.getElementById('live');
+const canvas = document.querySelector('#canvas');
+const liveViewBtn = document.getElementById('liveview-btn');
 const carouselElem = document.querySelector('#carousel-demo');
 const btnOpenFile = document.getElementById('open');
 
-liveView.addEventListener('click', (e) => {
-  window.biblioApi.notification('error', e, 'danger');
+liveViewBtn.addEventListener('click', async (e) => {
+  running = running ? false : true;
+  while (running) {
+    const data = await biblioApi.showLiveView();
+    const el = document.createElement('img');
+    el.className = 'canvas';
+    el.src = 'file://' + data;
+    live.innerHTML = '';
+    live.prepend(el);
+  }
+
+  //window.biblioApi.notification('error', e, 'danger');
 });
 
-btnOpenFile.addEventListener('click', (evt) => {
-  evt.preventDefault();
+btnOpenFile.addEventListener('click', (e) => {
+  e.preventDefault();
   biblioApi
     .getImage()
     .then((obj) => {
-      //console.log(obj);
-      const src = obj.selectedSrc;
-      const img = document.getElementById('img');
-      img.src = src;
+      canvas.src = obj.selectedSrc;
 
       document.getElementById('path').innerText = obj.selectedName;
       const cm = new CM(obj.allSrcInFolder);
       cm.populateImages(carouselElem);
+
       const imgs = document.querySelectorAll('img');
       imgs.forEach((thumbnail) =>
-        thumbnail.addEventListener('click', (e) => (img.src = e.target.src))
+        thumbnail.addEventListener('click', (e) => (canvas.src = e.target.src))
       );
     })
     .then(biblioApi.killCarousel(carouselElem))

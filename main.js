@@ -4,7 +4,6 @@ const path = require('path');
 const fs = require('fs');
 
 const camera = require('./src/scripts/camera');
-const livePreview = require('./src/scripts/live-preview');
 
 let livePrev;
 let mainWindow;
@@ -54,17 +53,16 @@ const startCamera = async (res, msg, err) => {
     return;
   }
 
-  /*  livePrev = new livePreview(
-    camera.camera,
-    document.getElementById('live'),
-    10
-  );
-  livePrev.start(); */
-
   const settings = await camera.getSettings();
   //console.log(settings);
   mainWindow.webContents.send('settings', settings);
 };
+
+ipcMain.handle('liveview', async (e) => {
+  //console.log('main ', e.sender.closeDevTools());
+  const path = await takePreview();
+  return path;
+});
 
 ipcMain.handle('pickFile', async () => {
   const obj = { selectedSrc: '', selectedName: '', allSrcInFolder: [] };
@@ -100,3 +98,15 @@ ipcMain.handle('pickFile', async () => {
     })
     .catch((err) => console.log(err));
 });
+
+takePreview = () => {
+  return new Promise((res, rej) =>
+    camera.camera.takePicture(
+      { keep: false, preview: true, targetPath: '/tmp/liveimg.XXXXXX' },
+      function (error, data) {
+        if (error) rej(error);
+        else res(data);
+      }
+    )
+  );
+};
