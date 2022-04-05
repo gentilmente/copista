@@ -12,18 +12,23 @@ const liveViewBtn = document.getElementById('liveview-btn');
 const carouselElem = document.querySelector('#carousel-demo');
 const btnOpenFile = document.getElementById('open');
 
+canvas.addEventListener('click', async () => {
+  console.log('yo');
+  const algo = await biblioApi.capture();
+  //console.log(algo);
+});
+
 liveViewBtn.addEventListener('click', async (e) => {
   running = running ? false : true;
   while (running) {
     const data = await biblioApi.showLiveView();
     const el = document.createElement('img');
     el.className = 'canvas';
+    el.id = 'canvas';
     el.src = 'file://' + data;
     live.innerHTML = '';
     live.prepend(el);
   }
-
-  //window.biblioApi.notification('error', e, 'danger');
 });
 
 btnOpenFile.addEventListener('click', (e) => {

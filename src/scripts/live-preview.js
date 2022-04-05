@@ -1,7 +1,7 @@
-const FS = require("fs");
+const FS = require('fs');
 
 class LivePreview {
-  constructor(cam, root, framerate = 10) {
+  constructor(cam, framerate = 10, root) {
     this.cam = cam;
     this.root = root;
     this.run = false;
@@ -11,6 +11,16 @@ class LivePreview {
     this.count = 0;
   }
   setNewPic(data) {
+    // Use two divs to display image, this prevents flickering.
+    let el = document.createElement('img');
+    el.className = 'live';
+    el.src = 'file://' + data;
+    this.root.prepend(el);
+    this.count++;
+    if (this.count > 2) {
+      this.root.removeChild(this.root.lastChild);
+    }
+
     /*     // Use two divs to display image, this prevents flickering.
     let el = document.createElement("div");
     //el.src = "file://"+data;
@@ -21,22 +31,12 @@ class LivePreview {
     if (this.count > 2) {
       this.root.removeChild(this.root.lastChild);
     } */
-
-    // Use two divs to display image, this prevents flickering.
-    let el = document.createElement("img");
-    el.className = "live";
-    el.src = "file://" + data;
-    this.root.prepend(el);
-    this.count++;
-    if (this.count > 2) {
-      this.root.removeChild(this.root.lastChild);
-    }
   }
 
   takePreview() {
     return new Promise((res, rej) =>
       this.cam.takePicture(
-        { keep: true, preview: true, targetPath: "/tmp/liveimg.XXXXXX" },
+        { keep: true, preview: true, targetPath: '/tmp/liveimg.XXXXXX' },
         function (error, data) {
           if (error) rej(error);
           else res(data);
@@ -46,16 +46,19 @@ class LivePreview {
   }
   async refreshPreview() {
     try {
+      console.log('gato');
       let path = await this.takePreview();
       if (this.lastImgPath) FS.unlink(this.lastImgPath, () => {});
       this.lastImgPath = path;
-      this.setNewPic(path);
+      //this.setNewPic(path);
+      return path;
     } catch (e) {
       console.error(e);
       this.stop();
     }
   }
   async previewInterval() {
+    console.log('hi');
     if (this.run) {
       let timePrev = process.hrtime();
       await this.refreshPreview();

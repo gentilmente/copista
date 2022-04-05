@@ -1,6 +1,7 @@
 const gphoto2 = require('gphoto2');
 const fs = require('fs');
 const { settings } = require('cluster');
+const path = require('path');
 let self;
 class Camera {
   /*
@@ -43,34 +44,23 @@ class Camera {
     return self.camera !== undefined || gphoto2 === null;
   }
 
-  takePicture(callback) {
+  takePicture(path) {
+    console.log(path);
     if (gphoto2 !== null) {
-      this._takePictureWithCamera(callback);
+      this._takePictureWithCamera(path);
     } else {
       this._createSamplePicture(callback);
     }
   }
 
-  _takePictureWithCamera(callback) {
+  _takePictureWithCamera(path) {
     var self = this;
-
-    if (self.camera === undefined) {
-      callback(-1, 'camera not initialized', null);
-      return;
-    }
-
-    const keep = true;
 
     self.camera.takePicture(
       { download: true, keep: keep },
       function (err, data) {
-        if (err) {
-          self.camera = undefined; // needs to be reinitialized
-          callback(-2, 'connection to camera failed', err);
-          return;
-        }
-
-        self._resizeAndSave(data, callback);
+        console.log(path, data);
+        fs.writeFileSync(path, data);
       }
     );
   }
@@ -82,14 +72,8 @@ class Camera {
   _resizeAndSave(data, callback) {
     //to do: projects path on config.json
     const filePath = './content/carpetaProyecto/foterli' + '.jpg';
-    fs.writeFile(filePath, data, function (err) {
-      if (err) {
-        console.log(err);
-        callback(-3, 'saving hq image failed', err);
-      } else {
-        callback(true);
-      }
-    });
+    console.log(data);
+    fs.writeFileSync(filePath, data);
   }
 
   getSettings() {

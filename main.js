@@ -5,7 +5,6 @@ const fs = require('fs');
 
 const camera = require('./src/scripts/camera');
 
-let livePrev;
 let mainWindow;
 // This method will be called when Electron has finished
 // initialization and is ready to create browser windows.
@@ -64,6 +63,26 @@ ipcMain.handle('liveview', async (e) => {
   return path;
 });
 
+takePreview = () => {
+  return new Promise((res, rej) =>
+    camera.camera.takePicture(
+      { keep: false, preview: true, targetPath: '/tmp/liveimg.XXXXXX' },
+      function (error, data) {
+        if (error) rej(error);
+        else res(data);
+      }
+    )
+  );
+};
+
+ipcMain.handle('capture', () => {
+  console.log('asdkjlhf');
+  camera.camera.takePicture(
+    path.join(__dirname, '/content/carpetaProyecto/foterli.jpg')
+  );
+  return;
+});
+
 ipcMain.handle('pickFile', async () => {
   const obj = { selectedSrc: '', selectedName: '', allSrcInFolder: [] };
   return dialog
@@ -98,15 +117,3 @@ ipcMain.handle('pickFile', async () => {
     })
     .catch((err) => console.log(err));
 });
-
-takePreview = () => {
-  return new Promise((res, rej) =>
-    camera.camera.takePicture(
-      { keep: false, preview: true, targetPath: '/tmp/liveimg.XXXXXX' },
-      function (error, data) {
-        if (error) rej(error);
-        else res(data);
-      }
-    )
-  );
-};
