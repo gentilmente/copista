@@ -1,34 +1,33 @@
 import CM from './scripts/carouselManager.js';
 
-let running = false;
-
 biblioApi.onInitCamera((e, msg) => {
   biblioApi.notification('oh no!', msg, 'danger');
 });
 
 const live = document.getElementById('live');
 const canvas = document.querySelector('#canvas');
-const liveViewBtn = document.getElementById('liveview-btn');
+const btnLiveView = document.getElementById('liveview-btn');
 const carouselElem = document.querySelector('#carousel-demo');
 const btnOpenFile = document.getElementById('open');
 
-canvas.addEventListener('click', async () => {
-  console.log('yo');
-  const algo = await biblioApi.capture();
-  //console.log(algo);
+let running = false;
+let id = 0;
+
+document.addEventListener('keyup', (e) => {
+  e.preventDefault();
+  if (e.code === 'Space') {
+    toggleLiveview();
+    setTimeout(async () => {
+      const srcPath = await biblioApi.capture();
+      console.log(srcPath);
+      putPhotoInGUI(srcPath);
+    }, 30);
+  }
 });
 
-liveViewBtn.addEventListener('click', async (e) => {
-  running = running ? false : true;
-  while (running) {
-    const data = await biblioApi.showLiveView();
-    const el = document.createElement('img');
-    el.className = 'canvas';
-    el.id = 'canvas';
-    el.src = 'file://' + data;
-    live.innerHTML = '';
-    live.prepend(el);
-  }
+btnLiveView.addEventListener('click', (e) => {
+  e.preventDefault();
+  toggleLiveview();
 });
 
 btnOpenFile.addEventListener('click', (e) => {
@@ -60,12 +59,43 @@ btnOpenFile.addEventListener('click', (e) => {
     });
 });
 
-/* document.addEventListener('keyup', (event) => {
-  console.log(event);
-  if (event.code === 'Space') {
-    //biblioApi.capture();
-    console.log('space');
-    event.preventDefault();
-    //biblioApi.kill();
+live.addEventListener('click', (e) => {
+  e.preventDefault();
+  toggleLiveview();
+  console.log('click: ', running, id);
+  setTimeout(async () => {
+    const srcPath = await biblioApi.capture();
+    console.log(srcPath);
+    putPhotoInGUI(srcPath);
+  }, 10);
+});
+
+function toggleLiveview() {
+  running = running ? false : true;
+  console.log('toggle: ' + running);
+  if (running) {
+    liveview();
+  } else {
+    console.log('stop:', id);
+    clearInterval(id);
   }
-}); */
+}
+
+function liveview() {
+  id = setInterval(async () => {
+    const srcPath = await biblioApi.showLiveView();
+    //console.log(srcPath);
+    putPhotoInGUI(srcPath);
+  }, 60);
+  console.log('lv: ', running, id);
+}
+
+function putPhotoInGUI(srcPath) {
+  const el = document.createElement('img');
+  el.id = 'canvas';
+  el.className = 'canvas';
+  //el.src = 'file://' + data;
+  el.src = srcPath;
+  live.innerHTML = '';
+  live.prepend(el);
+}

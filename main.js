@@ -75,12 +75,11 @@ takePreview = () => {
   );
 };
 
-ipcMain.handle('capture', () => {
+ipcMain.handle('capture', async () => {
   console.log('asdkjlhf');
-  camera.camera.takePicture(
-    path.join(__dirname, '/content/carpetaProyecto/foterli.jpg')
-  );
-  return;
+  console.log(camera.camera);
+  //await camera.camera.takePicture('./content/carpetaProyecto/foterli.jpg');
+  return '../content/carpetaProyectorss/DSC_0309.JPG';
 });
 
 ipcMain.handle('pickFile', async () => {

@@ -13,7 +13,7 @@ contextBridge.exposeInMainWorld('biblioApi', {
     new BulmaNotification().show(title, msg, type),
   onInitCamera: (cb) => ipcRenderer.on('notif:error', cb),
   showLiveView: () => ipcRenderer.invoke('liveview'),
-  capture: () => ipcRenderer.send('capture'),
+  capture: () => ipcRenderer.invoke('capture'),
   getImage: () => ipcRenderer.invoke('pickFile'),
   attachCarousel: (elem) => {
     carru.instance = bulmaCarousel.attach(elem, {
