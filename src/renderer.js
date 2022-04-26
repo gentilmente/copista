@@ -13,15 +13,14 @@ const btnOpenFile = document.getElementById('open');
 let running = false;
 let id = 0;
 
-document.addEventListener('keyup', (e) => {
+document.addEventListener('keyup', async (e) => {
   e.preventDefault();
   if (e.code === 'Space') {
     toggleLiveview();
-    setTimeout(async () => {
-      const srcPath = await biblioApi.capture();
-      console.log(srcPath);
+    await biblioApi.capture().then((srcPath) => {
       putPhotoInGUI(srcPath);
-    }, 30);
+      console.log(srcPath);
+    });
   }
 });
 
@@ -61,13 +60,13 @@ btnOpenFile.addEventListener('click', (e) => {
 
 live.addEventListener('click', (e) => {
   e.preventDefault();
-  toggleLiveview();
+  // si running false not toggleLiveview();
   console.log('click: ', running, id);
-  setTimeout(async () => {
-    const srcPath = await biblioApi.capture();
-    console.log(srcPath);
+
+  biblioApi.capture().then((srcPath) => {
+    console.log('srcFromMain', srcPath);
     putPhotoInGUI(srcPath);
-  }, 10);
+  });
 });
 
 function toggleLiveview() {

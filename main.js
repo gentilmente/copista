@@ -12,8 +12,10 @@ let mainWindow;
 app.whenReady().then(() => {
   app.allowRendererProcessReuse = false;
   mainWindow = new BrowserWindow({
-    width: 1400,
-    height: 830,
+    x: 0,
+    y: 0,
+    width: 802, //1400,
+    height: 635, // 830,
     webPreferences: {
       preload: path.join(__dirname, 'preload.js'),
     },
@@ -74,12 +76,36 @@ takePreview = () => {
     )
   );
 };
-
+let count = 0;
 ipcMain.handle('capture', async () => {
-  console.log('asdkjlhf');
-  console.log(camera.camera);
-  //await camera.camera.takePicture('./content/carpetaProyecto/foterli.jpg');
-  return '../content/carpetaProyectorss/DSC_0309.JPG';
+  const newPath = __dirname + '/picture' + count + '.jpg';
+  count++;
+  console.log(newPath);
+  //console.log(camera.camera);
+  //await camera.takePicture(newPath);
+  /*   return await camera.camera.takePicture(
+    { keep: false, targetPath: '/tmp/foo.XXXXXX' },
+    (er, tmpname) => {
+      fs.renameSync(tmpname, newPath);
+    }
+  ); */
+  return new Promise((res, rej) =>
+    camera.camera.takePicture(
+      { keep: false, targetPath: newPath },
+      (error, data) => {
+        if (error) rej(error);
+        else {
+          res((data) => fs.renameSync(tmpname, data));
+        }
+      }
+    )
+  );
+  /* return new Promise((res, rej) => {
+    setTimeout(() => {
+      console.log('done capture');
+      res(newPath);
+    }, 2000);
+  }); */
 });
 
 ipcMain.handle('pickFile', async () => {

@@ -57,7 +57,7 @@ class Camera {
     var self = this;
 
     self.camera.takePicture(
-      { download: true, keep: keep },
+      { download: true, keep: false },
       function (err, data) {
         console.log(path, data);
         fs.writeFileSync(path, data);
