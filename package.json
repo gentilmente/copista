@@ -37,7 +37,8 @@
     "bulma-o-steps": "^1.1.0",
     "bulma-quickview": "^2.0.0",
     "electron-squirrel-startup": "^1.0.0",
-    "gphoto2": "^0.3.2"
+    "gphoto2": "^0.3.2",
+    "i18next": "^21.6.16"
   },
   "config": {
     "forge": {
