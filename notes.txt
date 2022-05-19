@@ -1,3 +1,9 @@
+node_modules have issues in gphoto2 and bulma addons
+delete and re npm i generate issues because origins
+so I touch directly in those node_modules
+so a hot fix is to have a backup in time machine of that folder
+versioning in github is another approach but not yet
+
 nvm use 12 para npm i -f gphoto2 y pueda hacer el build
 después de instalar gphoto2 se puede usar node actual
 
@@ -12,3 +18,13 @@ NODE_MODULE(gphoto2, init)
 
 in binding.gyp
 11 for 14
+
+if have errors on console.log
+in node_modules/bulma-quickview/package.json
+change line 89 
+./dist/js/bulma-quickview.min.jss <-- js
+
+in bulma o steps
+node_modules/bulma-o-steps/bulma-steps.min.css
+search and delete z-index=5 
+
