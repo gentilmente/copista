@@ -28,7 +28,7 @@
     "@electron-forge/maker-zip": "^6.0.0-beta.61",
     "@fortawesome/fontawesome-free": "^6.0.0",
     "bulma": "^0.9.3",
-    "electron": "^16.0.1",
+    "electron": "^17.0.1",
     "electron-rebuild": "^3.2.5"
   },
   "dependencies": {
